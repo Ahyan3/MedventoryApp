@@ -56,5 +56,4 @@ The system ensures **accuracy, accountability, and efficiency** in hospital phar
 
 ## 📄 License
 © 2025 Ryan Francis Romano — All Rights Reserved.  
-*(You can replace this with an open-source license like MIT or Apache 2.0 if you wish.)*
 
