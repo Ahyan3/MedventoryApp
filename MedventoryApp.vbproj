@@ -6,7 +6,22 @@
     <StartupObject>Sub Main</StartupObject>
     <UseWindowsForms>true</UseWindowsForms>
     <MyType>WindowsForms</MyType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="obj\**" />
+    <Compile Remove="src\obj\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <EmbeddedResource Remove="src\obj\**" />
+    <None Remove="obj\**" />
+    <None Remove="src\obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\net8.0-windows\MedventoryApp.deps.json" />
+    <Content Include="bin\Debug\net8.0-windows\MedventoryApp.runtimeconfig.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <Import Include="System.Data" />
@@ -31,6 +46,27 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="bin\Release\net8.0-windows\" />
+    <Folder Include="database\" />
+    <Folder Include="docs\screenshots\" />
+    <Folder Include="src\Models\" />
+    <Folder Include="src\Resources\" />
+    <Folder Include="src\Respiratories\" />
+    <Folder Include="src\Services\" />
+    <Folder Include="tests\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\net8.0-windows\MedventoryApp.dll" />
+    <None Include="bin\Debug\net8.0-windows\MedventoryApp.exe" />
+    <None Include="bin\Debug\net8.0-windows\MedventoryApp.pdb" />
+    <None Include="bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
+    <None Include="bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Abstractions.dll" />
+    <None Include="bin\Debug\net8.0-windows\Npgsql.dll" />
+    <None Include="MedventoryApp.sln" />
   </ItemGroup>
 
 </Project>
