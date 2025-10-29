@@ -28,13 +28,16 @@ Partial Class ForgotPasswordForm
         txtNewPassword = New TextBox()
         btnReset = New Button()
         lblMessage = New Label()
+        Label5 = New Label()
+        Label3 = New Label()
+        txtFullname = New TextBox()
         SuspendLayout()
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
         Label1.Font = New Font("Poppins", 14.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(141, 115)
+        Label1.Location = New Point(117, 121)
         Label1.Name = "Label1"
         Label1.Size = New Size(174, 34)
         Label1.TabIndex = 0
@@ -43,7 +46,7 @@ Partial Class ForgotPasswordForm
         ' txtEmail
         ' 
         txtEmail.Font = New Font("Poppins", 14.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtEmail.Location = New Point(340, 115)
+        txtEmail.Location = New Point(404, 119)
         txtEmail.Name = "txtEmail"
         txtEmail.Size = New Size(223, 36)
         txtEmail.TabIndex = 1
@@ -52,7 +55,7 @@ Partial Class ForgotPasswordForm
         ' 
         Label2.AutoSize = True
         Label2.Font = New Font("Poppins", 14.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(104, 199)
+        Label2.Location = New Point(117, 265)
         Label2.Name = "Label2"
         Label2.Size = New Size(211, 34)
         Label2.TabIndex = 2
@@ -61,7 +64,7 @@ Partial Class ForgotPasswordForm
         ' txtNewPassword
         ' 
         txtNewPassword.Font = New Font("Poppins", 14.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtNewPassword.Location = New Point(340, 199)
+        txtNewPassword.Location = New Point(404, 265)
         txtNewPassword.Name = "txtNewPassword"
         txtNewPassword.Size = New Size(223, 36)
         txtNewPassword.TabIndex = 3
@@ -70,9 +73,9 @@ Partial Class ForgotPasswordForm
         ' btnReset
         ' 
         btnReset.Font = New Font("Poppins", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnReset.Location = New Point(340, 283)
+        btnReset.Location = New Point(307, 344)
         btnReset.Name = "btnReset"
-        btnReset.Size = New Size(223, 39)
+        btnReset.Size = New Size(199, 39)
         btnReset.TabIndex = 4
         btnReset.Text = "Enter"
         btnReset.UseVisualStyleBackColor = True
@@ -81,23 +84,59 @@ Partial Class ForgotPasswordForm
         ' 
         lblMessage.AutoSize = True
         lblMessage.Font = New Font("Poppins", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblMessage.Location = New Point(340, 351)
+        lblMessage.Location = New Point(404, 355)
         lblMessage.Name = "lblMessage"
         lblMessage.Size = New Size(0, 28)
         lblMessage.TabIndex = 5
+        ' 
+        ' Label5
+        ' 
+        Label5.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
+        Label5.AutoSize = True
+        Label5.Font = New Font("Showcard Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label5.Location = New Point(307, 33)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(199, 27)
+        Label5.TabIndex = 9
+        Label5.Text = "MEDVENTORY APP"
+        ' 
+        ' Label3
+        ' 
+        Label3.AutoSize = True
+        Label3.Font = New Font("Poppins", 14.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label3.Location = New Point(117, 195)
+        Label3.Name = "Label3"
+        Label3.Size = New Size(161, 34)
+        Label3.TabIndex = 10
+        Label3.Text = "Enter Fullname:"
+        ' 
+        ' txtFullname
+        ' 
+        txtFullname.Font = New Font("Poppins", 14.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtFullname.Location = New Point(404, 192)
+        txtFullname.Name = "txtFullname"
+        txtFullname.Size = New Size(223, 36)
+        txtFullname.TabIndex = 11
+        txtFullname.UseSystemPasswordChar = True
         ' 
         ' ForgotPasswordForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
+        Controls.Add(txtFullname)
+        Controls.Add(Label3)
+        Controls.Add(Label5)
         Controls.Add(lblMessage)
         Controls.Add(btnReset)
         Controls.Add(txtNewPassword)
         Controls.Add(Label2)
         Controls.Add(txtEmail)
         Controls.Add(Label1)
+        FormBorderStyle = FormBorderStyle.FixedSingle
+        MaximizeBox = False
         Name = "ForgotPasswordForm"
+        StartPosition = FormStartPosition.CenterScreen
         Text = "ForgotPasswordForm"
         ResumeLayout(False)
         PerformLayout()
@@ -109,4 +148,7 @@ Partial Class ForgotPasswordForm
     Friend WithEvents txtNewPassword As TextBox
     Friend WithEvents btnReset As Button
     Friend WithEvents lblMessage As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents txtFullname As TextBox
 End Class

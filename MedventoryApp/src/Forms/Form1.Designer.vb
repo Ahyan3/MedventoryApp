@@ -33,16 +33,17 @@ Partial Class Form1
         Button1.Name = "Button1"
         Button1.Size = New Size(154, 37)
         Button1.TabIndex = 0
-        Button1.Text = "Enter"
+        Button1.Text = "Start"
         Button1.UseVisualStyleBackColor = True
         ' 
         ' Label1
         ' 
+        Label1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         Label1.AutoSize = True
-        Label1.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(263, 149)
+        Label1.Font = New Font("Showcard Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label1.Location = New Point(225, 155)
         Label1.Name = "Label1"
-        Label1.Size = New Size(244, 21)
+        Label1.Size = New Size(339, 27)
         Label1.TabIndex = 1
         Label1.Text = "WELCOME TO MEDVENTORY APP"
         ' 
@@ -53,8 +54,12 @@ Partial Class Form1
         ClientSize = New Size(800, 450)
         Controls.Add(Label1)
         Controls.Add(Button1)
+        FormBorderStyle = FormBorderStyle.FixedSingle
+        MaximizeBox = False
         Name = "Form1"
+        StartPosition = FormStartPosition.CenterScreen
         Text = "Form1"
+        WindowState = FormWindowState.Minimized
         ResumeLayout(False)
         PerformLayout()
     End Sub

@@ -73,4 +73,15 @@ Public Class Login
         ' Optionally, hide the current form
         ' Me.Hide()
     End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+        If CheckBox1.Checked Then
+            TextBox2.UseSystemPasswordChar = False
+            CheckBox1.Text = "Hide Password"
+        Else
+            TextBox2.UseSystemPasswordChar = True
+            CheckBox1.Text = "Show Password"
+        End If
+    End Sub
+
 End Class

@@ -1,7 +1,7 @@
 ﻿Imports Npgsql
 
 Public Class ForgotPasswordForm
-    ' Replace with your actual Supabase/PostgreSQL connection string
+    ' Your Supabase/PostgreSQL connection string
     Private connectionString As String = "Host=aws-1-ap-southeast-1.pooler.supabase.com;Username=postgres.okexwfjhcijqblmzzgxq;Password=DCsID1gqH6Egkv7p;Database=postgres"
 
     Private Sub ForgotPasswordForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -13,9 +13,11 @@ Public Class ForgotPasswordForm
 
     Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
         Dim email As String = txtEmail.Text.Trim()
+        Dim full_name As String = txtFullname.Text.Trim()
         Dim newPassword As String = txtNewPassword.Text.Trim()
 
-        If email = "" Or newPassword = "" Then
+        ' Validate empty fields
+        If email = "" Or full_name = "" Or newPassword = "" Then
             lblMessage.Text = "Please fill in all fields."
             lblMessage.ForeColor = Color.Red
             Return
@@ -25,28 +27,45 @@ Public Class ForgotPasswordForm
             Using conn As New NpgsqlConnection(connectionString)
                 conn.Open()
 
-                Dim checkQuery As String = "SELECT COUNT(*) FROM users WHERE email = @Email"
+                ' ✅ Step 1: Check if email and full name match an existing user
+                Dim checkQuery As String = "SELECT COUNT(*) FROM users WHERE email = @Email AND full_name = @Fullname"
                 Using checkCmd As New NpgsqlCommand(checkQuery, conn)
                     checkCmd.Parameters.AddWithValue("@Email", email)
+                    checkCmd.Parameters.AddWithValue("@Fullname", full_name)
                     Dim count As Integer = CInt(checkCmd.ExecuteScalar())
 
                     If count = 0 Then
-                        lblMessage.Text = "Email not found."
+                        lblMessage.Text = "Email and full name do not match our records."
                         lblMessage.ForeColor = Color.Red
                         Return
                     End If
                 End Using
 
-                Dim updateQuery As String = "UPDATE users SET password = @Password WHERE email = @Email"
-                Using updateCmd As New NpgsqlCommand(updateQuery, conn)
-                    updateCmd.Parameters.AddWithValue("@Password", newPassword)
-                    updateCmd.Parameters.AddWithValue("@Email", email)
-                    updateCmd.ExecuteNonQuery()
+                ' ✅ Step 2: Insert a password reset request instead of changing immediately
+                ' (So Super Admin can approve it later)
+                Dim insertQuery As String = "
+                    INSERT INTO password_reset_requests (email, full_name, new_password, status, request_date)
+                    VALUES (@Email, @Fullname, @NewPassword, 'Pending', NOW());
+                "
+                Using insertCmd As New NpgsqlCommand(insertQuery, conn)
+                    insertCmd.Parameters.AddWithValue("@Email", email)
+                    insertCmd.Parameters.AddWithValue("@Fullname", full_name)
+                    insertCmd.Parameters.AddWithValue("@NewPassword", newPassword)
+                    insertCmd.ExecuteNonQuery()
                 End Using
             End Using
 
-            lblMessage.Text = "Password reset successful!"
+            ' ✅ Step 3: Notify user
+            lblMessage.Text = "Password reset request sent. Please wait for Super Admin approval."
             lblMessage.ForeColor = Color.Green
+
+            MessageBox.Show("Your password reset request has been sent. Please wait for the Super Admin to approve it before you can log in.",
+                            "Request Sent", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            ' Optional: Clear the form
+            txtEmail.Clear()
+            txtFullname.Clear()
+            txtNewPassword.Clear()
 
         Catch ex As Exception
             lblMessage.Text = "Error: " & ex.Message
