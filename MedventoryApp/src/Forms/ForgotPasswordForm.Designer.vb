@@ -31,6 +31,8 @@ Partial Class ForgotPasswordForm
         Label5 = New Label()
         Label3 = New Label()
         txtFullname = New TextBox()
+        btnBack = New Button()
+        lblMe = New Label()
         SuspendLayout()
         ' 
         ' Label1
@@ -77,14 +79,14 @@ Partial Class ForgotPasswordForm
         btnReset.Name = "btnReset"
         btnReset.Size = New Size(199, 39)
         btnReset.TabIndex = 4
-        btnReset.Text = "Enter"
+        btnReset.Text = "Send Request"
         btnReset.UseVisualStyleBackColor = True
         ' 
         ' lblMessage
         ' 
         lblMessage.AutoSize = True
         lblMessage.Font = New Font("Poppins", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblMessage.Location = New Point(404, 355)
+        lblMessage.Location = New Point(117, 396)
         lblMessage.Name = "lblMessage"
         lblMessage.Size = New Size(0, 28)
         lblMessage.TabIndex = 5
@@ -119,11 +121,30 @@ Partial Class ForgotPasswordForm
         txtFullname.TabIndex = 11
         txtFullname.UseSystemPasswordChar = True
         ' 
+        ' btnBack
+        ' 
+        btnBack.Location = New Point(34, 33)
+        btnBack.Name = "btnBack"
+        btnBack.Size = New Size(75, 23)
+        btnBack.TabIndex = 12
+        btnBack.Text = "Back"
+        btnBack.UseVisualStyleBackColor = True
+        ' 
+        ' lblMe
+        ' 
+        lblMe.AutoSize = True
+        lblMe.Location = New Point(117, 402)
+        lblMe.Name = "lblMe"
+        lblMe.Size = New Size(0, 15)
+        lblMe.TabIndex = 13
+        ' 
         ' ForgotPasswordForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
+        Controls.Add(lblMe)
+        Controls.Add(btnBack)
         Controls.Add(txtFullname)
         Controls.Add(Label3)
         Controls.Add(Label5)
@@ -151,4 +172,6 @@ Partial Class ForgotPasswordForm
     Friend WithEvents Label5 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents txtFullname As TextBox
+    Friend WithEvents btnBack As Button
+    Friend WithEvents lblMe As Label
 End Class
