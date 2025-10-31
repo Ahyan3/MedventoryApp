@@ -119,7 +119,6 @@ Partial Class ForgotPasswordForm
         txtFullname.Name = "txtFullname"
         txtFullname.Size = New Size(223, 36)
         txtFullname.TabIndex = 11
-        txtFullname.UseSystemPasswordChar = True
         ' 
         ' btnBack
         ' 

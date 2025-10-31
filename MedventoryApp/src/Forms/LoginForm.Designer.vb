@@ -73,9 +73,9 @@ Partial Class Login
         Label1.Font = New Font("Poppins", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label1.Location = New Point(150, 160)
         Label1.Name = "Label1"
-        Label1.Size = New Size(94, 28)
+        Label1.Size = New Size(55, 28)
         Label1.TabIndex = 3
-        Label1.Text = "Username"
+        Label1.Text = "Email"
         ' 
         ' Label2
         ' 
