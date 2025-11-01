@@ -43,7 +43,7 @@ Partial Class Login
         Button1.Location = New Point(297, 321)
         Button1.Name = "Button1"
         Button1.Size = New Size(220, 38)
-        Button1.TabIndex = 0
+        Button1.TabIndex = 3
         Button1.Text = "Enter"
         Button1.UseVisualStyleBackColor = True
         ' 
@@ -53,7 +53,7 @@ Partial Class Login
         TextBox1.Font = New Font("Poppins", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         TextBox1.Location = New Point(297, 157)
         TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(220, 31)
+        TextBox1.Size = New Size(327, 31)
         TextBox1.TabIndex = 1
         ' 
         ' TextBox2
@@ -62,7 +62,7 @@ Partial Class Login
         TextBox2.Font = New Font("Poppins", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         TextBox2.Location = New Point(297, 220)
         TextBox2.Name = "TextBox2"
-        TextBox2.Size = New Size(220, 31)
+        TextBox2.Size = New Size(327, 31)
         TextBox2.TabIndex = 2
         TextBox2.UseSystemPasswordChar = True
         ' 
@@ -92,7 +92,7 @@ Partial Class Login
         ' 
         Label3.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         Label3.AutoSize = True
-        Label3.Location = New Point(21, 291)
+        Label3.Location = New Point(59, 291)
         Label3.Name = "Label3"
         Label3.Size = New Size(0, 15)
         Label3.TabIndex = 5
@@ -105,7 +105,7 @@ Partial Class Login
         CheckBox1.Location = New Point(297, 279)
         CheckBox1.Name = "CheckBox1"
         CheckBox1.Size = New Size(108, 19)
-        CheckBox1.TabIndex = 6
+        CheckBox1.TabIndex = 4
         CheckBox1.Text = "Show Password"
         CheckBox1.UseVisualStyleBackColor = False
         ' 
@@ -113,11 +113,12 @@ Partial Class Login
         ' 
         Label4.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom
         Label4.AutoSize = True
-        Label4.BackColor = SystemColors.ActiveCaption
-        Label4.Location = New Point(359, 379)
+        Label4.BackColor = SystemColors.ButtonFace
+        Label4.BorderStyle = BorderStyle.Fixed3D
+        Label4.Location = New Point(466, 291)
         Label4.Name = "Label4"
-        Label4.Size = New Size(95, 15)
-        Label4.TabIndex = 7
+        Label4.Size = New Size(97, 17)
+        Label4.TabIndex = 5
         Label4.Text = "Forgot Password"
         ' 
         ' Label5
@@ -148,6 +149,7 @@ Partial Class Login
         Panel1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         Panel1.BackColor = SystemColors.ActiveCaption
         Panel1.Controls.Add(Label3)
+        Panel1.Controls.Add(Label4)
         Panel1.Location = New Point(91, 88)
         Panel1.Name = "Panel1"
         Panel1.Size = New Size(605, 328)
@@ -160,7 +162,6 @@ Partial Class Login
         ClientSize = New Size(800, 450)
         Controls.Add(Label6)
         Controls.Add(Label5)
-        Controls.Add(Label4)
         Controls.Add(CheckBox1)
         Controls.Add(Label2)
         Controls.Add(Label1)

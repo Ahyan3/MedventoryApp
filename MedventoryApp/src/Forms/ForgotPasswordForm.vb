@@ -131,95 +131,93 @@ Password Reset Notification System"
     End Function
 
     ' 🔘 Reset Button
-    Private Async Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
+    Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
+        Dim fullName As String = txtFullname.Text.Trim()
         Dim email As String = txtEmail.Text.Trim()
-        Dim full_name As String = txtFullname.Text.Trim()
         Dim newPassword As String = txtNewPassword.Text.Trim()
 
+        ' 🔒 Disable button to prevent duplicate clicks
+        btnReset.Enabled = False
         lblMessage.Text = ""
         lblMessage.ForeColor = Color.Black
 
         ' 🧾 Validation
-        If String.IsNullOrWhiteSpace(email) OrElse String.IsNullOrWhiteSpace(full_name) OrElse String.IsNullOrWhiteSpace(newPassword) Then
+        If fullName = "" Or email = "" Or newPassword = "" Then
             lblMessage.Text = "Please fill in all fields."
             lblMessage.ForeColor = Color.Red
-            Return
-        End If
-
-        If Not email.Contains("@") OrElse Not email.Contains(".") Then
-            lblMessage.Text = "Please enter a valid email address."
-            lblMessage.ForeColor = Color.Red
+            btnReset.Enabled = True
             Return
         End If
 
         Try
-            Using conn As New NpgsqlConnection(connectionString)
-                Await conn.OpenAsync()
+        Using conn As New NpgsqlConnection(connectionString)
+            conn.Open()
 
-                ' 🔍 Check for duplicate pending requests
-                Dim pendingCheck As String = "
-                    SELECT COUNT(*) FROM password_reset_requests 
-                    WHERE email = @Email AND status = 'Pending';
-                "
-                Using pendingCmd As New NpgsqlCommand(pendingCheck, conn)
-                    pendingCmd.Parameters.AddWithValue("@Email", email)
-                    Dim pendingCount As Integer = CInt(Await pendingCmd.ExecuteScalarAsync())
-                    If pendingCount > 0 Then
-                        lblMessage.Text = "You already have a pending password reset request. Please wait for approval."
-                        lblMessage.ForeColor = Color.OrangeRed
-                        Return
-                    End If
-                End Using
+            ' 🧠 Step 1: Verify if user exists and full name matches
+            Dim checkUserQuery As String = "SELECT COUNT(*) FROM users WHERE email = @Email AND full_name = @FullName"
+            Using checkCmd As New NpgsqlCommand(checkUserQuery, conn)
+                checkCmd.Parameters.AddWithValue("@Email", email)
+                checkCmd.Parameters.AddWithValue("@FullName", fullName)
+                Dim userExists As Integer = CInt(checkCmd.ExecuteScalar())
 
-                ' ✅ Validate user
-                Dim checkQuery As String = "SELECT COUNT(*) FROM users WHERE email = @Email AND full_name = @Fullname"
-                Using checkCmd As New NpgsqlCommand(checkQuery, conn)
-                    checkCmd.Parameters.AddWithValue("@Email", email)
-                    checkCmd.Parameters.AddWithValue("@Fullname", full_name)
-                    Dim count As Integer = CInt(Await checkCmd.ExecuteScalarAsync())
-                    If count = 0 Then
-                        lblMessage.Text = "Email and full name do not match our records."
-                        lblMessage.ForeColor = Color.Red
-                        Return
-                    End If
-                End Using
-
-                ' 🔐 Hash new password
-                Dim hashedPassword As String = HashPassword(newPassword)
-
-                ' 🗂 Insert reset request
-                Dim insertQuery As String = "
-                    INSERT INTO password_reset_requests (email, full_name, new_password, status, request_date)
-                    VALUES (@Email, @Fullname, @NewPassword, 'Pending', NOW());
-                "
-                Using insertCmd As New NpgsqlCommand(insertQuery, conn)
-                    insertCmd.Parameters.AddWithValue("@Email", email)
-                    insertCmd.Parameters.AddWithValue("@Fullname", full_name)
-                    insertCmd.Parameters.AddWithValue("@NewPassword", hashedPassword)
-                    Await insertCmd.ExecuteNonQueryAsync()
-                End Using
+                If userExists = 0 Then
+                    lblMessage.Text = "User not found or full name does not match."
+                    lblMessage.ForeColor = Color.Red
+                    btnReset.Enabled = True
+                    Return
+                End If
             End Using
 
-            ' 📩 Send all notification emails (non-blocking)
-            Await SendAllNotificationsAsync(email, full_name)
+            ' 🧠 Step 2: Check if there's already a pending request for this user
+            Dim checkPendingQuery As String = "SELECT COUNT(*) FROM password_reset_requests WHERE email = @Email AND status = 'Pending'"
+            Using pendingCmd As New NpgsqlCommand(checkPendingQuery, conn)
+                pendingCmd.Parameters.AddWithValue("@Email", email)
+                Dim pendingCount As Integer = CInt(pendingCmd.ExecuteScalar())
 
-            lblMessage.Text = "Password reset request sent. Please wait for Super Admin approval."
-            lblMessage.ForeColor = Color.Green
+                If pendingCount > 0 Then
+                    lblMessage.Text = "You already have a pending request. Please wait for admin approval."
+                    lblMessage.ForeColor = Color.Orange
+                    btnReset.Enabled = True
+                    Return
+                End If
+            End Using
 
-            MessageBox.Show("Your password reset request has been submitted successfully." & vbCrLf &
-                            "You'll receive an email once approved.",
-                            "Request Sent", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            ' 🧩 Step 3: Insert new password reset request
+            Dim insertQuery As String = "
+                INSERT INTO password_reset_requests (full_name, email, new_password, status, request_date)
+                VALUES (@FullName, @Email, @NewPassword, 'Pending', NOW());
+            "
 
-            txtEmail.Clear()
+            Using insertCmd As New NpgsqlCommand(insertQuery, conn)
+                insertCmd.Parameters.AddWithValue("@FullName", fullName)
+                insertCmd.Parameters.AddWithValue("@Email", email)
+                insertCmd.Parameters.AddWithValue("@NewPassword", HashPassword(newPassword))
+                insertCmd.ExecuteNonQuery()
+            End Using
+        End Using
+
+        lblMessage.Text = "Request submitted. Please wait for admin approval."
+        lblMessage.ForeColor = Color.Green
+
+            MessageBox.Show("Password reset request sent successfully. Please wait for SuperAdmin approval.", "Request Sent", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            ' 📤 Send notifications (non-blocking)
+            Task.Run(Async Function()
+                         Await SendAllNotificationsAsync(email, fullName)
+                     End Function)
+
+            ' 🧹 Clear fields
             txtFullname.Clear()
-            txtNewPassword.Clear()
+        txtEmail.Clear()
+        txtNewPassword.Clear()
 
-        Catch ex As Exception
-            lblMessage.Text = "An unexpected error occurred. Please try again later."
-            lblMessage.ForeColor = Color.Red
-            LogNotification(email, full_name, "System Error", "System", "Failed", ex.Message)
-        End Try
-    End Sub
+    Catch ex As Exception
+        lblMessage.Text = "Error: " & ex.Message
+        lblMessage.ForeColor = Color.Red
+    Finally
+        btnReset.Enabled = True ' 🔓 Always re-enable button at the end
+    End Try
+End Sub
 
     ' 🔙 Back to Login
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click

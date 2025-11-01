@@ -39,7 +39,7 @@ Partial Class ForgotPasswordForm
         ' 
         Label1.AutoSize = True
         Label1.Font = New Font("Poppins", 14.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(117, 121)
+        Label1.Location = New Point(72, 114)
         Label1.Name = "Label1"
         Label1.Size = New Size(174, 34)
         Label1.TabIndex = 0
@@ -48,16 +48,16 @@ Partial Class ForgotPasswordForm
         ' txtEmail
         ' 
         txtEmail.Font = New Font("Poppins", 14.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtEmail.Location = New Point(404, 119)
+        txtEmail.Location = New Point(359, 112)
         txtEmail.Name = "txtEmail"
-        txtEmail.Size = New Size(223, 36)
+        txtEmail.Size = New Size(333, 36)
         txtEmail.TabIndex = 1
         ' 
         ' Label2
         ' 
         Label2.AutoSize = True
         Label2.Font = New Font("Poppins", 14.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(117, 265)
+        Label2.Location = New Point(72, 258)
         Label2.Name = "Label2"
         Label2.Size = New Size(211, 34)
         Label2.TabIndex = 2
@@ -66,16 +66,16 @@ Partial Class ForgotPasswordForm
         ' txtNewPassword
         ' 
         txtNewPassword.Font = New Font("Poppins", 14.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtNewPassword.Location = New Point(404, 265)
+        txtNewPassword.Location = New Point(359, 258)
         txtNewPassword.Name = "txtNewPassword"
-        txtNewPassword.Size = New Size(223, 36)
+        txtNewPassword.Size = New Size(333, 36)
         txtNewPassword.TabIndex = 3
         txtNewPassword.UseSystemPasswordChar = True
         ' 
         ' btnReset
         ' 
         btnReset.Font = New Font("Poppins", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnReset.Location = New Point(307, 344)
+        btnReset.Location = New Point(299, 335)
         btnReset.Name = "btnReset"
         btnReset.Size = New Size(199, 39)
         btnReset.TabIndex = 4
@@ -86,7 +86,7 @@ Partial Class ForgotPasswordForm
         ' 
         lblMessage.AutoSize = True
         lblMessage.Font = New Font("Poppins", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblMessage.Location = New Point(117, 396)
+        lblMessage.Location = New Point(72, 395)
         lblMessage.Name = "lblMessage"
         lblMessage.Size = New Size(0, 28)
         lblMessage.TabIndex = 5
@@ -106,33 +106,33 @@ Partial Class ForgotPasswordForm
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Poppins", 14.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label3.Location = New Point(117, 195)
+        Label3.Location = New Point(72, 188)
         Label3.Name = "Label3"
-        Label3.Size = New Size(161, 34)
+        Label3.Size = New Size(166, 34)
         Label3.TabIndex = 10
-        Label3.Text = "Enter Fullname:"
+        Label3.Text = "Enter Full name:"
         ' 
         ' txtFullname
         ' 
         txtFullname.Font = New Font("Poppins", 14.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtFullname.Location = New Point(404, 192)
+        txtFullname.Location = New Point(359, 185)
         txtFullname.Name = "txtFullname"
-        txtFullname.Size = New Size(223, 36)
-        txtFullname.TabIndex = 11
+        txtFullname.Size = New Size(333, 36)
+        txtFullname.TabIndex = 2
         ' 
         ' btnBack
         ' 
-        btnBack.Location = New Point(34, 33)
+        btnBack.Location = New Point(42, 33)
         btnBack.Name = "btnBack"
-        btnBack.Size = New Size(75, 23)
-        btnBack.TabIndex = 12
+        btnBack.Size = New Size(75, 27)
+        btnBack.TabIndex = 5
         btnBack.Text = "Back"
         btnBack.UseVisualStyleBackColor = True
         ' 
         ' lblMe
         ' 
         lblMe.AutoSize = True
-        lblMe.Location = New Point(117, 402)
+        lblMe.Location = New Point(72, 401)
         lblMe.Name = "lblMe"
         lblMe.Size = New Size(0, 15)
         lblMe.TabIndex = 13
