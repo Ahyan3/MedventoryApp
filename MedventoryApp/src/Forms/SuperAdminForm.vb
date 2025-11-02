@@ -9,6 +9,9 @@ Public Class SuperAdmin
     ' 🧩 Database Connection (Supabase/PostgreSQL)
     Private ReadOnly connectionString As String = ConfigurationManager.ConnectionStrings("SupabaseConnection").ConnectionString
 
+    Public LoggedInEmail As String = "superadmin@medventory.com" ' Temporary, until LoginForm passes it
+    Public LoggedInRole As String = "Super Admin"
+
     ' 📧 Email Configuration (Stored in App.config for Security)
     Private ReadOnly senderEmail As String = ConfigurationManager.AppSettings("SenderEmail")
     Private ReadOnly senderPassword As String = ConfigurationManager.AppSettings("SenderPassword")
@@ -84,16 +87,16 @@ Public Class SuperAdmin
         ' Ignore header clicks
         If e.RowIndex < 0 Then Return
 
-        Dim selectedRow As DataGridViewRow = dgvUsers.Rows(e.RowIndex)
-        Dim email As String = selectedRow.Cells("email").Value.ToString()
+        Dim selectedRow = dgvUsers.Rows(e.RowIndex)
+        Dim email = selectedRow.Cells("email").Value.ToString
 
         ' 🧩 Edit Button
         If dgvUsers.Columns(e.ColumnIndex).Name = "Edit" Then
-            Dim fullName As String = selectedRow.Cells("full_name").Value.ToString()
-            Dim role As String = selectedRow.Cells("role").Value.ToString()
+            Dim fullName = selectedRow.Cells("full_name").Value.ToString
+            Dim role = selectedRow.Cells("role").Value.ToString
 
             Dim editForm As New EditUserForm(email, fullName, role, connectionString)
-            If editForm.ShowDialog() = DialogResult.OK Then
+            If editForm.ShowDialog = DialogResult.OK Then
                 LoadUsers()
                 LoadActivityLogs()
                 AddActivityLog("Edited user: " & email)
@@ -102,13 +105,13 @@ Public Class SuperAdmin
 
         ' 🧩 Delete Button
         If dgvUsers.Columns(e.ColumnIndex).Name = "Delete" Then
-            Dim confirm As DialogResult = MessageBox.Show($"Are you sure you want to delete {email}?",
+            Dim confirm = MessageBox.Show($"Are you sure you want to delete {email}?",
                                                       "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
             If confirm = DialogResult.Yes Then
                 Try
                     Using conn As New NpgsqlConnection(connectionString)
                         conn.Open()
-                        Dim query As String = "DELETE FROM users WHERE email = @Email"
+                        Dim query = "DELETE FROM users WHERE email = @Email"
                         Using cmd As New NpgsqlCommand(query, conn)
                             cmd.Parameters.AddWithValue("@Email", email)
                             cmd.ExecuteNonQuery()
@@ -361,9 +364,76 @@ Public Class SuperAdmin
     End Sub
 
 
+    '=====================
+    'Medicine Management Tab
+    '=====================
     Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
         TabControl1.SelectedTab = TabPage3
     End Sub
+
+    Private Sub LoadMedicines(Optional filter As String = "")
+        Try
+            Using conn As New NpgsqlConnection(connectionString)
+                conn.Open()
+                Dim query As String = "
+                SELECT name, category, quantity, unit, expiry_date, supplier, added_by, added_date
+                FROM medicines
+                ORDER BY added_date DESC;
+            "
+
+                If Not String.IsNullOrEmpty(filter) Then
+                    query = "
+                    SELECT name, category, quantity, unit, expiry_date, supplier, added_by, added_date
+                    FROM medicines
+                    WHERE LOWER(name) LIKE @Filter
+                       OR LOWER(category) LIKE @Filter
+                       OR LOWER(supplier) LIKE @Filter
+                    ORDER BY added_date DESC;
+                "
+                End If
+
+                Using cmd As New NpgsqlCommand(query, conn)
+                    If Not String.IsNullOrEmpty(filter) Then
+                        cmd.Parameters.AddWithValue("@Filter", "%" & filter.ToLower() & "%")
+                    End If
+
+                    Using reader As NpgsqlDataReader = cmd.ExecuteReader()
+                        Dim dt As New DataTable()
+                        dt.Load(reader)
+                        dgvMedicines.DataSource = dt
+                    End Using
+                End Using
+            End Using
+
+            dgvMedicines.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            dgvMedicines.Columns("name").HeaderText = "Medicine Name"
+            dgvMedicines.Columns("category").HeaderText = "Category"
+            dgvMedicines.Columns("quantity").HeaderText = "Quantity"
+            dgvMedicines.Columns("unit").HeaderText = "Unit"
+            dgvMedicines.Columns("expiry_date").HeaderText = "Expiry Date"
+            dgvMedicines.Columns("supplier").HeaderText = "Supplier"
+            dgvMedicines.Columns("added_by").HeaderText = "Added By"
+            dgvMedicines.Columns("added_date").HeaderText = "Date Added"
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading medicines: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnRefreshMedicine_Click(sender As Object, e As EventArgs) Handles btnRefreshMedicine.Click
+        LoadMedicines()
+    End Sub
+
+    Private Sub txtSearchMedicine_TextChanged(sender As Object, e As EventArgs) Handles txtSearchMedicine.TextChanged
+        LoadMedicines(txtSearchMedicine.Text)
+    End Sub
+
+    Private Sub btnAddMedicine_Click(sender As Object, e As EventArgs) Handles btnAddMedicine.Click
+        Dim addForm As New AddMedicineForm(connectionString, LoggedInEmail)
+        addForm.ShowDialog()
+        LoadMedicines() ' 🔄 Refresh after adding
+    End Sub
+
 
     '=====================
     'Activity Logs Tab

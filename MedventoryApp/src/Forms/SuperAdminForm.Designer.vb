@@ -52,24 +52,6 @@ Partial Class SuperAdmin
         Label9 = New Label()
         PictureBox1 = New PictureBox()
         TabPage3 = New TabPage()
-        Panel9 = New Panel()
-        DataGridView1 = New DataGridView()
-        DataGridViewTextBoxColumn5 = New DataGridViewTextBoxColumn()
-        DataGridViewTextBoxColumn6 = New DataGridViewTextBoxColumn()
-        DataGridViewTextBoxColumn7 = New DataGridViewTextBoxColumn()
-        DataGridViewTextBoxColumn8 = New DataGridViewTextBoxColumn()
-        DataGridViewButtonColumn1 = New DataGridViewButtonColumn()
-        Label14 = New Label()
-        PictureBox6 = New PictureBox()
-        Panel10 = New Panel()
-        Label15 = New Label()
-        PictureBox7 = New PictureBox()
-        Panel11 = New Panel()
-        Label16 = New Label()
-        PictureBox8 = New PictureBox()
-        Panel12 = New Panel()
-        Label17 = New Label()
-        PictureBox9 = New PictureBox()
         TabPage4 = New TabPage()
         Panel13 = New Panel()
         DataGridView3 = New DataGridView()
@@ -125,6 +107,13 @@ Partial Class SuperAdmin
         Label2 = New Label()
         Panel2 = New Panel()
         Label1 = New Label()
+        btnRefreshMedicine = New Button()
+        Panel11 = New Panel()
+        txtSearchMedicine = New TextBox()
+        dgvMedicines = New DataGridView()
+        Label16 = New Label()
+        PictureBox8 = New PictureBox()
+        btnAddMedicine = New Button()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         Panel6.SuspendLayout()
@@ -147,15 +136,6 @@ Partial Class SuperAdmin
         CType(dgvUsers, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         TabPage3.SuspendLayout()
-        Panel9.SuspendLayout()
-        CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
-        CType(PictureBox6, ComponentModel.ISupportInitialize).BeginInit()
-        Panel10.SuspendLayout()
-        CType(PictureBox7, ComponentModel.ISupportInitialize).BeginInit()
-        Panel11.SuspendLayout()
-        CType(PictureBox8, ComponentModel.ISupportInitialize).BeginInit()
-        Panel12.SuspendLayout()
-        CType(PictureBox9, ComponentModel.ISupportInitialize).BeginInit()
         TabPage4.SuspendLayout()
         Panel13.SuspendLayout()
         CType(DataGridView3, ComponentModel.ISupportInitialize).BeginInit()
@@ -177,6 +157,9 @@ Partial Class SuperAdmin
         CType(dgvActivityLogs, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox17, ComponentModel.ISupportInitialize).BeginInit()
         Panel1.SuspendLayout()
+        Panel11.SuspendLayout()
+        CType(dgvMedicines, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PictureBox8, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' TabControl1
@@ -470,165 +453,15 @@ Partial Class SuperAdmin
         ' TabPage3
         ' 
         TabPage3.BackColor = Color.Gainsboro
-        TabPage3.Controls.Add(Panel9)
-        TabPage3.Controls.Add(Panel10)
+        TabPage3.Controls.Add(btnAddMedicine)
+        TabPage3.Controls.Add(btnRefreshMedicine)
         TabPage3.Controls.Add(Panel11)
-        TabPage3.Controls.Add(Panel12)
         TabPage3.Location = New Point(4, 24)
         TabPage3.Name = "TabPage3"
         TabPage3.Padding = New Padding(3)
         TabPage3.Size = New Size(1473, 752)
         TabPage3.TabIndex = 2
-        TabPage3.Text = "File Management"
-        ' 
-        ' Panel9
-        ' 
-        Panel9.BackColor = Color.WhiteSmoke
-        Panel9.Controls.Add(DataGridView1)
-        Panel9.Controls.Add(Label14)
-        Panel9.Controls.Add(PictureBox6)
-        Panel9.Location = New Point(744, 384)
-        Panel9.Name = "Panel9"
-        Panel9.Size = New Size(500, 330)
-        Panel9.TabIndex = 3
-        ' 
-        ' DataGridView1
-        ' 
-        DataGridView1.BackgroundColor = Color.Gainsboro
-        DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Columns.AddRange(New DataGridViewColumn() {DataGridViewTextBoxColumn5, DataGridViewTextBoxColumn6, DataGridViewTextBoxColumn7, DataGridViewTextBoxColumn8, DataGridViewButtonColumn1})
-        DataGridView1.Location = New Point(13, 44)
-        DataGridView1.Name = "DataGridView1"
-        DataGridView1.Size = New Size(475, 271)
-        DataGridView1.TabIndex = 13
-        ' 
-        ' DataGridViewTextBoxColumn5
-        ' 
-        DataGridViewTextBoxColumn5.HeaderText = "Full Name"
-        DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
-        ' 
-        ' DataGridViewTextBoxColumn6
-        ' 
-        DataGridViewTextBoxColumn6.HeaderText = "Email"
-        DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
-        ' 
-        ' DataGridViewTextBoxColumn7
-        ' 
-        DataGridViewTextBoxColumn7.HeaderText = "Status"
-        DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
-        DataGridViewTextBoxColumn7.Width = 75
-        ' 
-        ' DataGridViewTextBoxColumn8
-        ' 
-        DataGridViewTextBoxColumn8.HeaderText = "Request Date"
-        DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
-        ' 
-        ' DataGridViewButtonColumn1
-        ' 
-        DataGridViewButtonColumn1.HeaderText = "Actions"
-        DataGridViewButtonColumn1.Name = "DataGridViewButtonColumn1"
-        ' 
-        ' Label14
-        ' 
-        Label14.AutoSize = True
-        Label14.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label14.Location = New Point(13, 13)
-        Label14.Name = "Label14"
-        Label14.Size = New Size(310, 28)
-        Label14.TabIndex = 12
-        Label14.Text = "Pending Password Reset Request"
-        ' 
-        ' PictureBox6
-        ' 
-        PictureBox6.Location = New Point(463, 10)
-        PictureBox6.Name = "PictureBox6"
-        PictureBox6.Size = New Size(25, 25)
-        PictureBox6.TabIndex = 2
-        PictureBox6.TabStop = False
-        ' 
-        ' Panel10
-        ' 
-        Panel10.BackColor = Color.WhiteSmoke
-        Panel10.Controls.Add(Label15)
-        Panel10.Controls.Add(PictureBox7)
-        Panel10.Location = New Point(228, 384)
-        Panel10.Name = "Panel10"
-        Panel10.Size = New Size(500, 330)
-        Panel10.TabIndex = 4
-        ' 
-        ' Label15
-        ' 
-        Label15.AutoSize = True
-        Label15.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label15.Location = New Point(13, 13)
-        Label15.Name = "Label15"
-        Label15.Size = New Size(112, 28)
-        Label15.TabIndex = 11
-        Label15.Text = "Full Access"
-        ' 
-        ' PictureBox7
-        ' 
-        PictureBox7.Location = New Point(465, 10)
-        PictureBox7.Name = "PictureBox7"
-        PictureBox7.Size = New Size(25, 25)
-        PictureBox7.TabIndex = 2
-        PictureBox7.TabStop = False
-        ' 
-        ' Panel11
-        ' 
-        Panel11.BackColor = Color.WhiteSmoke
-        Panel11.Controls.Add(Label16)
-        Panel11.Controls.Add(PictureBox8)
-        Panel11.Location = New Point(744, 38)
-        Panel11.Name = "Panel11"
-        Panel11.Size = New Size(500, 330)
-        Panel11.TabIndex = 5
-        ' 
-        ' Label16
-        ' 
-        Label16.AutoSize = True
-        Label16.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label16.Location = New Point(13, 13)
-        Label16.Name = "Label16"
-        Label16.Size = New Size(177, 28)
-        Label16.TabIndex = 10
-        Label16.Text = "User Management"
-        ' 
-        ' PictureBox8
-        ' 
-        PictureBox8.Location = New Point(463, 10)
-        PictureBox8.Name = "PictureBox8"
-        PictureBox8.Size = New Size(25, 25)
-        PictureBox8.TabIndex = 1
-        PictureBox8.TabStop = False
-        ' 
-        ' Panel12
-        ' 
-        Panel12.BackColor = Color.WhiteSmoke
-        Panel12.Controls.Add(Label17)
-        Panel12.Controls.Add(PictureBox9)
-        Panel12.Location = New Point(228, 38)
-        Panel12.Name = "Panel12"
-        Panel12.Size = New Size(500, 330)
-        Panel12.TabIndex = 2
-        ' 
-        ' Label17
-        ' 
-        Label17.AutoSize = True
-        Label17.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label17.Location = New Point(13, 13)
-        Label17.Name = "Label17"
-        Label17.Size = New Size(130, 28)
-        Label17.TabIndex = 9
-        Label17.Text = "Pending User"
-        ' 
-        ' PictureBox9
-        ' 
-        PictureBox9.Location = New Point(465, 12)
-        PictureBox9.Name = "PictureBox9"
-        PictureBox9.Size = New Size(25, 25)
-        PictureBox9.TabIndex = 0
-        PictureBox9.TabStop = False
+        TabPage3.Text = "Medicine Management"
         ' 
         ' TabPage4
         ' 
@@ -837,6 +670,7 @@ Partial Class SuperAdmin
         ' 
         ' Panel18
         ' 
+        Panel18.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         Panel18.BackColor = Color.WhiteSmoke
         Panel18.Controls.Add(DataGridView4)
         Panel18.Controls.Add(Label23)
@@ -875,6 +709,7 @@ Partial Class SuperAdmin
         ' 
         ' Panel19
         ' 
+        Panel19.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         Panel19.BackColor = Color.WhiteSmoke
         Panel19.Controls.Add(DataGridView8)
         Panel19.Controls.Add(Label24)
@@ -913,6 +748,7 @@ Partial Class SuperAdmin
         ' 
         ' Panel20
         ' 
+        Panel20.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         Panel20.BackColor = Color.WhiteSmoke
         Panel20.Controls.Add(txtSearchLogs)
         Panel20.Controls.Add(dgvActivityLogs)
@@ -1082,11 +918,11 @@ Partial Class SuperAdmin
         ' 
         Label4.AutoSize = True
         Label4.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label4.Location = New Point(34, 267)
+        Label4.Location = New Point(6, 265)
         Label4.Name = "Label4"
-        Label4.Size = New Size(167, 28)
+        Label4.Size = New Size(218, 28)
         Label4.TabIndex = 5
-        Label4.Text = "File Management"
+        Label4.Text = "Medicine Management"
         ' 
         ' Label3
         ' 
@@ -1125,6 +961,70 @@ Partial Class SuperAdmin
         Label1.Size = New Size(134, 23)
         Label1.TabIndex = 0
         Label1.Text = "Super Admin"
+        ' 
+        ' btnRefreshMedicine
+        ' 
+        btnRefreshMedicine.Location = New Point(260, 18)
+        btnRefreshMedicine.Name = "btnRefreshMedicine"
+        btnRefreshMedicine.Size = New Size(75, 23)
+        btnRefreshMedicine.TabIndex = 6
+        btnRefreshMedicine.Text = "Refresh"
+        btnRefreshMedicine.UseVisualStyleBackColor = True
+        ' 
+        ' Panel11
+        ' 
+        Panel11.BackColor = Color.WhiteSmoke
+        Panel11.Controls.Add(txtSearchMedicine)
+        Panel11.Controls.Add(dgvMedicines)
+        Panel11.Controls.Add(Label16)
+        Panel11.Controls.Add(PictureBox8)
+        Panel11.Location = New Point(260, 47)
+        Panel11.Name = "Panel11"
+        Panel11.Size = New Size(1178, 678)
+        Panel11.TabIndex = 3
+        ' 
+        ' txtSearchMedicine
+        ' 
+        txtSearchMedicine.Location = New Point(903, 13)
+        txtSearchMedicine.Name = "txtSearchMedicine"
+        txtSearchMedicine.Size = New Size(230, 23)
+        txtSearchMedicine.TabIndex = 16
+        ' 
+        ' dgvMedicines
+        ' 
+        dgvMedicines.BackgroundColor = Color.Gainsboro
+        dgvMedicines.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgvMedicines.Location = New Point(13, 44)
+        dgvMedicines.Name = "dgvMedicines"
+        dgvMedicines.Size = New Size(1151, 619)
+        dgvMedicines.TabIndex = 14
+        ' 
+        ' Label16
+        ' 
+        Label16.AutoSize = True
+        Label16.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label16.Location = New Point(13, 13)
+        Label16.Name = "Label16"
+        Label16.Size = New Size(218, 28)
+        Label16.TabIndex = 9
+        Label16.Text = "Medicine Management"
+        ' 
+        ' PictureBox8
+        ' 
+        PictureBox8.Location = New Point(1139, 10)
+        PictureBox8.Name = "PictureBox8"
+        PictureBox8.Size = New Size(25, 25)
+        PictureBox8.TabIndex = 0
+        PictureBox8.TabStop = False
+        ' 
+        ' btnAddMedicine
+        ' 
+        btnAddMedicine.Location = New Point(1363, 18)
+        btnAddMedicine.Name = "btnAddMedicine"
+        btnAddMedicine.Size = New Size(75, 23)
+        btnAddMedicine.TabIndex = 7
+        btnAddMedicine.Text = "Add"
+        btnAddMedicine.UseVisualStyleBackColor = True
         ' 
         ' SuperAdmin
         ' 
@@ -1166,19 +1066,6 @@ Partial Class SuperAdmin
         CType(dgvUsers, ComponentModel.ISupportInitialize).EndInit()
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         TabPage3.ResumeLayout(False)
-        Panel9.ResumeLayout(False)
-        Panel9.PerformLayout()
-        CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
-        CType(PictureBox6, ComponentModel.ISupportInitialize).EndInit()
-        Panel10.ResumeLayout(False)
-        Panel10.PerformLayout()
-        CType(PictureBox7, ComponentModel.ISupportInitialize).EndInit()
-        Panel11.ResumeLayout(False)
-        Panel11.PerformLayout()
-        CType(PictureBox8, ComponentModel.ISupportInitialize).EndInit()
-        Panel12.ResumeLayout(False)
-        Panel12.PerformLayout()
-        CType(PictureBox9, ComponentModel.ISupportInitialize).EndInit()
         TabPage4.ResumeLayout(False)
         Panel13.ResumeLayout(False)
         Panel13.PerformLayout()
@@ -1208,6 +1095,10 @@ Partial Class SuperAdmin
         CType(PictureBox17, ComponentModel.ISupportInitialize).EndInit()
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
+        Panel11.ResumeLayout(False)
+        Panel11.PerformLayout()
+        CType(dgvMedicines, ComponentModel.ISupportInitialize).EndInit()
+        CType(PictureBox8, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
     Friend WithEvents TabControl1 As TabControl
@@ -1245,24 +1136,6 @@ Partial Class SuperAdmin
     Friend WithEvents Label12 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents dgvResetRequests As DataGridView
-    Friend WithEvents Panel9 As Panel
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewButtonColumn1 As DataGridViewButtonColumn
-    Friend WithEvents Label14 As Label
-    Friend WithEvents PictureBox6 As PictureBox
-    Friend WithEvents Panel10 As Panel
-    Friend WithEvents Label15 As Label
-    Friend WithEvents PictureBox7 As PictureBox
-    Friend WithEvents Panel11 As Panel
-    Friend WithEvents Label16 As Label
-    Friend WithEvents PictureBox8 As PictureBox
-    Friend WithEvents Panel12 As Panel
-    Friend WithEvents Label17 As Label
-    Friend WithEvents PictureBox9 As PictureBox
     Friend WithEvents Panel13 As Panel
     Friend WithEvents DataGridView3 As DataGridView
     Friend WithEvents DataGridViewTextBoxColumn9 As DataGridViewTextBoxColumn
@@ -1313,4 +1186,11 @@ Partial Class SuperAdmin
     Friend WithEvents PictureBox17 As PictureBox
     Friend WithEvents Label26 As Label
     Friend WithEvents txtSearchUser As TextBox
+    Friend WithEvents btnRefreshMedicine As Button
+    Friend WithEvents Panel11 As Panel
+    Friend WithEvents txtSearchMedicine As TextBox
+    Friend WithEvents dgvMedicines As DataGridView
+    Friend WithEvents Label16 As Label
+    Friend WithEvents PictureBox8 As PictureBox
+    Friend WithEvents btnAddMedicine As Button
 End Class
