@@ -84,7 +84,7 @@ Partial Class EditUserForm
         ' lblMessage
         ' 
         lblMessage.AutoSize = True
-        lblMessage.Font = New Font("Poppins", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblMessage.Font = New Font("Poppins", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblMessage.Location = New Point(105, 392)
         lblMessage.Name = "lblMessage"
         lblMessage.Size = New Size(0, 28)
@@ -92,7 +92,7 @@ Partial Class EditUserForm
         ' 
         ' btnSave
         ' 
-        btnSave.Font = New Font("Poppins", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        btnSave.Font = New Font("Poppins", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnSave.Location = New Point(332, 332)
         btnSave.Name = "btnSave"
         btnSave.Size = New Size(199, 39)
@@ -133,7 +133,6 @@ Partial Class EditUserForm
         ' cmbRole
         ' 
         cmbRole.FormattingEnabled = True
-        cmbRole.Items.AddRange(New Object() {"Super Admin", "Admin", "Doctor", "Pharmacist"})
         cmbRole.Location = New Point(392, 262)
         cmbRole.Name = "cmbRole"
         cmbRole.Size = New Size(333, 23)
@@ -141,7 +140,7 @@ Partial Class EditUserForm
         ' 
         ' EditUserForm
         ' 
-        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
         Controls.Add(cmbRole)

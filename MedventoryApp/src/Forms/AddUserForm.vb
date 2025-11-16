@@ -7,16 +7,25 @@ Public Class AddUserForm
     Public Sub New(connStr As String)
         InitializeComponent()
         connectionString = connStr
+        cmbRole.DropDownStyle = ComboBoxStyle.DropDownList
         cmbRole.Items.AddRange({"Super Admin", "Admin", "Doctor", "Pharmacist"})
     End Sub
 
     Private Sub btnAddUser_Click(sender As Object, e As EventArgs) Handles btnAddUser.Click
         Dim name = txtFullName.Text.Trim()
         Dim email = txtEmail.Text.Trim()
-        Dim role = cmbRole.SelectedItem?.ToString()?.ToLower()
+        Dim selectedRole = cmbRole.SelectedItem?.ToString()
+
+        Dim role As String = selectedRole.ToLower().Replace(" ", "_")
 
         If name = "" Or email = "" Or role Is Nothing Then
             MessageBox.Show("Please fill all fields.")
+            Return
+        End If
+
+        ' 🔍 Email format validation
+        If Not IsValidEmail(email) Then
+            MessageBox.Show("Invalid email format. Please enter a valid email.")
             Return
         End If
 
@@ -68,4 +77,15 @@ Public Class AddUserForm
             MessageBox.Show("Error sending email: " & ex.Message)
         End Try
     End Sub
+
+    'Validate Email Format
+    Private Function IsValidEmail(email As String) As Boolean
+        Try
+            Dim addr As New MailAddress(email)
+            Return addr.Address = email
+        Catch
+            Return False
+        End Try
+    End Function
+
 End Class

@@ -23,7 +23,7 @@ Public Class EditUserForm
                 Dim query As String = "UPDATE users SET full_name = @FullName, role = @Role WHERE email = @Email"
                 Using cmd As New NpgsqlCommand(query, conn)
                     cmd.Parameters.AddWithValue("@FullName", txtFullname.Text.Trim())
-                    cmd.Parameters.AddWithValue("@Role", cmbRole.SelectedItem.ToString().ToLower())
+                    cmd.Parameters.AddWithValue("@Role", cmbRole.SelectedItem.ToString().ToLower()) 'has error if nothing is selected, must fix
                     cmd.Parameters.AddWithValue("@Email", userEmail)
                     cmd.ExecuteNonQuery()
                 End Using
@@ -42,4 +42,5 @@ Public Class EditUserForm
         Me.DialogResult = DialogResult.Cancel
         Me.Close()
     End Sub
+
 End Class

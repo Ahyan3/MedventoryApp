@@ -30,7 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CuoreUI.Winforms" Version="2025.11.15" />
     <PackageReference Include="Npgsql" Version="9.0.4" />
+    <PackageReference Include="Siticone.NetCore.UI" Version="2025.10.21" />
   </ItemGroup>
 
   <ItemGroup>

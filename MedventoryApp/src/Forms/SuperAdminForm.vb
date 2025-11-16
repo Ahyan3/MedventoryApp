@@ -454,5 +454,13 @@ Public Class SuperAdmin
         TabControl1.SelectedTab = TabPage6
     End Sub
 
+    Private Sub CuiButton1_Click(sender As Object, e As EventArgs) Handles CuiButton1.Click
+        TabControl1.SelectedTab = TabPage1
+    End Sub
 
+    Private Sub CuiButton2_Click(sender As Object, e As EventArgs) Handles CuiButton2.Click
+        Dim f As New AddUserForm(connectionString)
+        f.StartPosition = FormStartPosition.CenterScreen
+        f.Show()
+    End Sub
 End Class

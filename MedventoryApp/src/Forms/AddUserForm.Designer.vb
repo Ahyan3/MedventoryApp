@@ -37,7 +37,6 @@ Partial Class AddUserForm
         ' cmbRole
         ' 
         cmbRole.FormattingEnabled = True
-        cmbRole.Items.AddRange(New Object() {"Super Admin", "Admin", "Doctor", "Pharmacist"})
         cmbRole.Location = New Point(392, 262)
         cmbRole.Name = "cmbRole"
         cmbRole.Size = New Size(333, 23)

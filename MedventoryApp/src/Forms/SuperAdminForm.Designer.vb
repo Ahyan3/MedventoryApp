@@ -115,6 +115,7 @@ Partial Class SuperAdmin
         ToolStripMenuItem2 = New ToolStripMenuItem()
         Panel3 = New Panel()
         Panel1 = New Panel()
+        CuiButton1 = New CuoreUI.Controls.cuiButton()
         Label26 = New Label()
         Label8 = New Label()
         Label7 = New Label()
@@ -125,6 +126,7 @@ Partial Class SuperAdmin
         Label2 = New Label()
         Panel2 = New Panel()
         Label1 = New Label()
+        CuiButton2 = New CuoreUI.Controls.cuiButton()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         Panel6.SuspendLayout()
@@ -287,6 +289,7 @@ Partial Class SuperAdmin
         ' Panel17
         ' 
         Panel17.BackColor = Color.WhiteSmoke
+        Panel17.Controls.Add(CuiButton2)
         Panel17.Controls.Add(DataGridView7)
         Panel17.Controls.Add(Label22)
         Panel17.Controls.Add(PictureBox14)
@@ -1005,13 +1008,14 @@ Partial Class SuperAdmin
         Panel3.BackColor = Color.White
         Panel3.Location = New Point(2, -14)
         Panel3.Name = "Panel3"
-        Panel3.Size = New Size(1481, 24)
+        Panel3.Size = New Size(1481, 23)
         Panel3.TabIndex = 3
         ' 
         ' Panel1
         ' 
         Panel1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left
         Panel1.BackColor = Color.WhiteSmoke
+        Panel1.Controls.Add(CuiButton1)
         Panel1.Controls.Add(Label26)
         Panel1.Controls.Add(Label8)
         Panel1.Controls.Add(Label7)
@@ -1026,6 +1030,43 @@ Partial Class SuperAdmin
         Panel1.Name = "Panel1"
         Panel1.Size = New Size(230, 750)
         Panel1.TabIndex = 5
+        ' 
+        ' CuiButton1
+        ' 
+        CuiButton1.CheckButton = False
+        CuiButton1.Checked = False
+        CuiButton1.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        CuiButton1.CheckedForeColor = Color.White
+        CuiButton1.CheckedImageTint = Color.White
+        CuiButton1.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        CuiButton1.Content = "Dashboard"
+        CuiButton1.DialogResult = DialogResult.None
+        CuiButton1.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        CuiButton1.ForeColor = Color.Black
+        CuiButton1.HoverBackground = Color.White
+        CuiButton1.HoverForeColor = Color.Black
+        CuiButton1.HoverImageTint = Color.White
+        CuiButton1.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        CuiButton1.Image = Nothing
+        CuiButton1.ImageAutoCenter = True
+        CuiButton1.ImageExpand = New Point(0, 0)
+        CuiButton1.ImageOffset = New Point(0, 0)
+        CuiButton1.Location = New Point(52, 113)
+        CuiButton1.Name = "CuiButton1"
+        CuiButton1.NormalBackground = Color.White
+        CuiButton1.NormalForeColor = Color.Black
+        CuiButton1.NormalImageTint = Color.White
+        CuiButton1.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        CuiButton1.OutlineThickness = 1F
+        CuiButton1.PressedBackground = Color.WhiteSmoke
+        CuiButton1.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        CuiButton1.PressedImageTint = Color.White
+        CuiButton1.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        CuiButton1.Rounding = New Padding(8)
+        CuiButton1.Size = New Size(134, 50)
+        CuiButton1.TabIndex = 15
+        CuiButton1.TextAlignment = StringAlignment.Center
+        CuiButton1.TextOffset = New Point(0, 0)
         ' 
         ' Label26
         ' 
@@ -1125,6 +1166,43 @@ Partial Class SuperAdmin
         Label1.Size = New Size(134, 23)
         Label1.TabIndex = 0
         Label1.Text = "Super Admin"
+        ' 
+        ' CuiButton2
+        ' 
+        CuiButton2.CheckButton = False
+        CuiButton2.Checked = False
+        CuiButton2.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        CuiButton2.CheckedForeColor = Color.White
+        CuiButton2.CheckedImageTint = Color.White
+        CuiButton2.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        CuiButton2.Content = "Add"
+        CuiButton2.DialogResult = DialogResult.None
+        CuiButton2.Font = New Font("Poppins Medium", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        CuiButton2.ForeColor = Color.Black
+        CuiButton2.HoverBackground = Color.White
+        CuiButton2.HoverForeColor = Color.Black
+        CuiButton2.HoverImageTint = Color.White
+        CuiButton2.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        CuiButton2.Image = Nothing
+        CuiButton2.ImageAutoCenter = True
+        CuiButton2.ImageExpand = New Point(0, 0)
+        CuiButton2.ImageOffset = New Point(0, 0)
+        CuiButton2.Location = New Point(470, 6)
+        CuiButton2.Name = "CuiButton2"
+        CuiButton2.NormalBackground = Color.White
+        CuiButton2.NormalForeColor = Color.Black
+        CuiButton2.NormalImageTint = Color.White
+        CuiButton2.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        CuiButton2.OutlineThickness = 1F
+        CuiButton2.PressedBackground = Color.WhiteSmoke
+        CuiButton2.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        CuiButton2.PressedImageTint = Color.White
+        CuiButton2.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        CuiButton2.Rounding = New Padding(8)
+        CuiButton2.Size = New Size(61, 32)
+        CuiButton2.TabIndex = 15
+        CuiButton2.TextAlignment = StringAlignment.Center
+        CuiButton2.TextOffset = New Point(0, 0)
         ' 
         ' SuperAdmin
         ' 
@@ -1313,4 +1391,6 @@ Partial Class SuperAdmin
     Friend WithEvents PictureBox17 As PictureBox
     Friend WithEvents Label26 As Label
     Friend WithEvents txtSearchUser As TextBox
+    Friend WithEvents CuiButton1 As CuoreUI.Controls.cuiButton
+    Friend WithEvents CuiButton2 As CuoreUI.Controls.cuiButton
 End Class
