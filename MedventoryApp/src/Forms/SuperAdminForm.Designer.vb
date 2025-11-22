@@ -33,10 +33,12 @@ Partial Class SuperAdmin
         Label13 = New Label()
         PictureBox5 = New PictureBox()
         Panel17 = New Panel()
+        CuiButton2 = New CuoreUI.Controls.cuiButton()
         DataGridView7 = New DataGridView()
         Label22 = New Label()
         PictureBox14 = New PictureBox()
         TabPage2 = New TabPage()
+        CuiButton3 = New CuoreUI.Controls.cuiButton()
         btnRefreshAll = New Button()
         Panel7 = New Panel()
         dgvResetRequests = New DataGridView()
@@ -126,7 +128,6 @@ Partial Class SuperAdmin
         Label2 = New Label()
         Panel2 = New Panel()
         Label1 = New Label()
-        CuiButton2 = New CuoreUI.Controls.cuiButton()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         Panel6.SuspendLayout()
@@ -298,6 +299,43 @@ Partial Class SuperAdmin
         Panel17.Size = New Size(575, 678)
         Panel17.TabIndex = 2
         ' 
+        ' CuiButton2
+        ' 
+        CuiButton2.CheckButton = False
+        CuiButton2.Checked = False
+        CuiButton2.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        CuiButton2.CheckedForeColor = Color.White
+        CuiButton2.CheckedImageTint = Color.White
+        CuiButton2.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        CuiButton2.Content = "Add"
+        CuiButton2.DialogResult = DialogResult.None
+        CuiButton2.Font = New Font("Poppins Medium", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        CuiButton2.ForeColor = Color.Black
+        CuiButton2.HoverBackground = Color.White
+        CuiButton2.HoverForeColor = Color.Black
+        CuiButton2.HoverImageTint = Color.White
+        CuiButton2.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        CuiButton2.Image = Nothing
+        CuiButton2.ImageAutoCenter = True
+        CuiButton2.ImageExpand = New Point(0, 0)
+        CuiButton2.ImageOffset = New Point(0, 0)
+        CuiButton2.Location = New Point(470, 6)
+        CuiButton2.Name = "CuiButton2"
+        CuiButton2.NormalBackground = Color.White
+        CuiButton2.NormalForeColor = Color.Black
+        CuiButton2.NormalImageTint = Color.White
+        CuiButton2.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        CuiButton2.OutlineThickness = 1F
+        CuiButton2.PressedBackground = Color.WhiteSmoke
+        CuiButton2.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        CuiButton2.PressedImageTint = Color.White
+        CuiButton2.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        CuiButton2.Rounding = New Padding(8)
+        CuiButton2.Size = New Size(61, 32)
+        CuiButton2.TabIndex = 15
+        CuiButton2.TextAlignment = StringAlignment.Center
+        CuiButton2.TextOffset = New Point(0, 0)
+        ' 
         ' DataGridView7
         ' 
         DataGridView7.BackgroundColor = Color.Gainsboro
@@ -328,6 +366,7 @@ Partial Class SuperAdmin
         ' TabPage2
         ' 
         TabPage2.BackColor = Color.Gainsboro
+        TabPage2.Controls.Add(CuiButton3)
         TabPage2.Controls.Add(btnRefreshAll)
         TabPage2.Controls.Add(Panel7)
         TabPage2.Controls.Add(Panel5)
@@ -338,6 +377,44 @@ Partial Class SuperAdmin
         TabPage2.Size = New Size(1473, 752)
         TabPage2.TabIndex = 1
         TabPage2.Text = "User Management"
+        ' 
+        ' CuiButton3
+        ' 
+        CuiButton3.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        CuiButton3.CheckButton = False
+        CuiButton3.Checked = False
+        CuiButton3.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        CuiButton3.CheckedForeColor = Color.White
+        CuiButton3.CheckedImageTint = Color.White
+        CuiButton3.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        CuiButton3.Content = "Add"
+        CuiButton3.DialogResult = DialogResult.None
+        CuiButton3.Font = New Font("Poppins Medium", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        CuiButton3.ForeColor = Color.Black
+        CuiButton3.HoverBackground = Color.White
+        CuiButton3.HoverForeColor = Color.Black
+        CuiButton3.HoverImageTint = Color.White
+        CuiButton3.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        CuiButton3.Image = Nothing
+        CuiButton3.ImageAutoCenter = True
+        CuiButton3.ImageExpand = New Point(0, 0)
+        CuiButton3.ImageOffset = New Point(0, 0)
+        CuiButton3.Location = New Point(1378, 9)
+        CuiButton3.Name = "CuiButton3"
+        CuiButton3.NormalBackground = Color.White
+        CuiButton3.NormalForeColor = Color.Black
+        CuiButton3.NormalImageTint = Color.White
+        CuiButton3.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        CuiButton3.OutlineThickness = 1F
+        CuiButton3.PressedBackground = Color.WhiteSmoke
+        CuiButton3.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        CuiButton3.PressedImageTint = Color.White
+        CuiButton3.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        CuiButton3.Rounding = New Padding(8)
+        CuiButton3.Size = New Size(61, 32)
+        CuiButton3.TabIndex = 16
+        CuiButton3.TextAlignment = StringAlignment.Center
+        CuiButton3.TextOffset = New Point(0, 0)
         ' 
         ' btnRefreshAll
         ' 
@@ -350,6 +427,7 @@ Partial Class SuperAdmin
         ' 
         ' Panel7
         ' 
+        Panel7.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Right
         Panel7.BackColor = Color.WhiteSmoke
         Panel7.Controls.Add(dgvResetRequests)
         Panel7.Controls.Add(Label12)
@@ -361,6 +439,7 @@ Partial Class SuperAdmin
         ' 
         ' dgvResetRequests
         ' 
+        dgvResetRequests.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         dgvResetRequests.BackgroundColor = Color.Gainsboro
         dgvResetRequests.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgvResetRequests.Location = New Point(13, 44)
@@ -388,6 +467,7 @@ Partial Class SuperAdmin
         ' 
         ' Panel5
         ' 
+        Panel5.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         Panel5.BackColor = Color.WhiteSmoke
         Panel5.Controls.Add(DataGridView5)
         Panel5.Controls.Add(Label10)
@@ -426,6 +506,7 @@ Partial Class SuperAdmin
         ' 
         ' Panel4
         ' 
+        Panel4.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         Panel4.BackColor = Color.WhiteSmoke
         Panel4.Controls.Add(txtSearchUser)
         Panel4.Controls.Add(dgvUsers)
@@ -445,6 +526,7 @@ Partial Class SuperAdmin
         ' 
         ' dgvUsers
         ' 
+        dgvUsers.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         dgvUsers.BackgroundColor = Color.Gainsboro
         dgvUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgvUsers.Location = New Point(13, 44)
@@ -1167,43 +1249,6 @@ Partial Class SuperAdmin
         Label1.TabIndex = 0
         Label1.Text = "Super Admin"
         ' 
-        ' CuiButton2
-        ' 
-        CuiButton2.CheckButton = False
-        CuiButton2.Checked = False
-        CuiButton2.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
-        CuiButton2.CheckedForeColor = Color.White
-        CuiButton2.CheckedImageTint = Color.White
-        CuiButton2.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
-        CuiButton2.Content = "Add"
-        CuiButton2.DialogResult = DialogResult.None
-        CuiButton2.Font = New Font("Poppins Medium", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        CuiButton2.ForeColor = Color.Black
-        CuiButton2.HoverBackground = Color.White
-        CuiButton2.HoverForeColor = Color.Black
-        CuiButton2.HoverImageTint = Color.White
-        CuiButton2.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
-        CuiButton2.Image = Nothing
-        CuiButton2.ImageAutoCenter = True
-        CuiButton2.ImageExpand = New Point(0, 0)
-        CuiButton2.ImageOffset = New Point(0, 0)
-        CuiButton2.Location = New Point(470, 6)
-        CuiButton2.Name = "CuiButton2"
-        CuiButton2.NormalBackground = Color.White
-        CuiButton2.NormalForeColor = Color.Black
-        CuiButton2.NormalImageTint = Color.White
-        CuiButton2.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
-        CuiButton2.OutlineThickness = 1F
-        CuiButton2.PressedBackground = Color.WhiteSmoke
-        CuiButton2.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
-        CuiButton2.PressedImageTint = Color.White
-        CuiButton2.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
-        CuiButton2.Rounding = New Padding(8)
-        CuiButton2.Size = New Size(61, 32)
-        CuiButton2.TabIndex = 15
-        CuiButton2.TextAlignment = StringAlignment.Center
-        CuiButton2.TextOffset = New Point(0, 0)
-        ' 
         ' SuperAdmin
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -1393,4 +1438,5 @@ Partial Class SuperAdmin
     Friend WithEvents txtSearchUser As TextBox
     Friend WithEvents CuiButton1 As CuoreUI.Controls.cuiButton
     Friend WithEvents CuiButton2 As CuoreUI.Controls.cuiButton
+    Friend WithEvents CuiButton3 As CuoreUI.Controls.cuiButton
 End Class

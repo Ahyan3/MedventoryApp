@@ -248,15 +248,33 @@ Public Class SuperAdmin
     Private Sub dgvResetRequests_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvResetRequests.CellContentClick
         If e.RowIndex < 0 Then Exit Sub
 
-        Dim id As Integer = dgvResetRequests.Rows(e.RowIndex).Cells("id").Value
-        Dim userEmail = dgvResetRequests.Rows(e.RowIndex).Cells("email").Value.ToString
+        Dim row = dgvResetRequests.Rows(e.RowIndex)
 
-        If dgvResetRequests.Columns(e.ColumnIndex).Name = "Approve" Then
+        ' Get UUID
+        Dim idValue = row.Cells("id").Value
+        If idValue Is Nothing OrElse IsDBNull(idValue) OrElse idValue.ToString().Trim() = "" Then
+            MessageBox.Show("This row is empty.", "Empty", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Dim id As String = idValue.ToString()
+
+        ' Get email
+        Dim emailValue = row.Cells("email").Value
+        Dim userEmail As String = If(emailValue Is Nothing, "", emailValue.ToString())
+
+        ' Identify action
+        Dim columnName = dgvResetRequests.Columns(e.ColumnIndex).Name
+
+        If columnName = "Approve" Then
             ApproveRequest(id, userEmail)
-        ElseIf dgvResetRequests.Columns(e.ColumnIndex).Name = "Reject" Then
+
+        ElseIf columnName = "Reject" Then
             RejectRequest(id, userEmail)
         End If
     End Sub
+
+
 
     ' =====================
     ' Approve a reset request
@@ -459,6 +477,12 @@ Public Class SuperAdmin
     End Sub
 
     Private Sub CuiButton2_Click(sender As Object, e As EventArgs) Handles CuiButton2.Click
+        Dim f As New AddUserForm(connectionString)
+        f.StartPosition = FormStartPosition.CenterScreen
+        f.Show
+    End Sub
+
+    Private Sub CuiButton3_Click(sender As Object, e As EventArgs) Handles CuiButton3.Click
         Dim f As New AddUserForm(connectionString)
         f.StartPosition = FormStartPosition.CenterScreen
         f.Show()
