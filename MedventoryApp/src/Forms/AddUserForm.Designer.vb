@@ -143,6 +143,7 @@ Partial Class AddUserForm
         Controls.Add(txtEmail)
         Controls.Add(lblEmail)
         Name = "AddUserForm"
+        StartPosition = FormStartPosition.CenterScreen
         Text = "AddUserForm"
         ResumeLayout(False)
         PerformLayout()

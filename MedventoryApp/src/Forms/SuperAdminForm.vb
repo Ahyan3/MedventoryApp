@@ -13,28 +13,14 @@ Public Class SuperAdmin
     Private ReadOnly senderEmail As String = ConfigurationManager.AppSettings("SenderEmail")
     Private ReadOnly senderPassword As String = ConfigurationManager.AppSettings("SenderPassword")
     Private ReadOnly superAdminEmail As String = ConfigurationManager.AppSettings("SuperAdminEmail")
+    Private addUserFormInstance As AddUserForm = Nothing
 
     Private Sub SuperAdminForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Label1.Text = "Super Admin"
+        Label1.Text = "Super Admin" 'removable
         LoadUsers()
         LoadActivityLogs()
+        LoadPendingUsers()
         LoadPendingResetRequests()
-    End Sub
-
-    Private Sub btnRefreshAll_Click(sender As Object, e As EventArgs) Handles btnRefreshAll.Click
-        Try
-            LoadUsers()
-            LoadPendingResetRequests()
-            ' Add other here for refresh
-
-            MessageBox.Show("All data refreshed successfully!", "Refreshed", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        Catch ex As Exception
-            MessageBox.Show("Error refreshing data: " & ex.Message)
-        End Try
-    End Sub
-
-    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
-        TabControl1.SelectedTab = TabPage1
     End Sub
 
     Private Sub LoadUsers()
@@ -79,6 +65,203 @@ Public Class SuperAdmin
             MessageBox.Show("Error loading users: " & ex.Message)
         End Try
     End Sub
+
+    Private Sub LoadActivityLogs(Optional filter As String = "")
+
+        If dgvActivityLogs.Rows.Count > 0 Then
+            dgvActivityLogs.FirstDisplayedScrollingRowIndex = 0
+        End If
+
+        Try
+            Using conn As New NpgsqlConnection(connectionString)
+                conn.Open()
+                Dim query As String = "
+                SELECT log_date, email, action
+                FROM user_activity_logs
+                ORDER BY log_date DESC
+            "
+
+                If Not String.IsNullOrEmpty(filter) Then
+                    query = "
+                    SELECT log_date, email, action
+                    FROM user_activity_logs
+                    WHERE LOWER(email) LIKE @Filter
+                       OR LOWER(action) LIKE @Filter
+                    ORDER BY log_date DESC
+                "
+                End If
+
+                Using cmd As New NpgsqlCommand(query, conn)
+                    If Not String.IsNullOrEmpty(filter) Then
+                        cmd.Parameters.AddWithValue("@Filter", "%" & filter.ToLower() & "%")
+                    End If
+
+                    Using reader As NpgsqlDataReader = cmd.ExecuteReader()
+                        Dim dt As New DataTable()
+                        dt.Load(reader)
+                        dgvActivityLogs.DataSource = dt
+                    End Using
+                End Using
+            End Using
+
+            ' Style the DataGridView
+            dgvActivityLogs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            dgvActivityLogs.Columns("log_date").HeaderText = "Timestamp"
+            dgvActivityLogs.Columns("email").HeaderText = "Email"
+            dgvActivityLogs.Columns("action").HeaderText = "Action Performed"
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading logs: " & ex.Message)
+        End Try
+    End Sub
+
+    Public Sub LoadPendingUsers()
+        Try
+            Using conn As New NpgsqlConnection(connectionString)
+                conn.Open()
+
+                Dim query As String = "SELECT id, full_name, email, role FROM pending_users ORDER BY created_at DESC"
+                Using cmd As New NpgsqlCommand(query, conn)
+                    Using da As New NpgsqlDataAdapter(cmd)
+                        Dim dt As New DataTable()
+                        da.Fill(dt)
+                        DataGridView6.DataSource = dt
+                        SiticoneDataGridView1.DataSource = dt 'remove if has subcription plan
+                    End Using
+                End Using
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading pending users: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub LoadPendingResetRequests()
+        Try
+            Using conn As New NpgsqlConnection(connectionString)
+                conn.Open()
+                Dim query As String = "
+                    SELECT id, full_name, email, status, request_date 
+                    FROM password_reset_requests
+                    WHERE status = 'Pending'
+                    ORDER BY request_date DESC;
+                "
+
+                Dim da As New NpgsqlDataAdapter(query, conn)
+                Dim dt As New DataTable()
+                da.Fill(dt)
+                dgvResetRequests.DataSource = dt
+            End Using
+
+            ' Hide ID column and rename headers
+            dgvResetRequests.Columns("id").Visible = False
+            dgvResetRequests.Columns("full_name").HeaderText = "Full Name"
+            dgvResetRequests.Columns("email").HeaderText = "Email"
+            dgvResetRequests.Columns("status").HeaderText = "Status"
+            dgvResetRequests.Columns("request_date").HeaderText = "Request Date"
+
+            dgvResetRequests.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            dgvResetRequests.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            dgvResetRequests.ReadOnly = True
+
+            ' Add Approve button if not exists
+            If Not dgvResetRequests.Columns.Contains("Approve") Then
+                Dim approveButton As New DataGridViewButtonColumn()
+                approveButton.Name = "Approve"
+                approveButton.HeaderText = "Approve"
+                approveButton.Text = "Approve"
+                approveButton.UseColumnTextForButtonValue = True
+                approveButton.SortMode = DataGridViewColumnSortMode.NotSortable
+                dgvResetRequests.Columns.Add(approveButton)
+            End If
+
+            ' Add Reject button if not exists
+            If Not dgvResetRequests.Columns.Contains("Reject") Then
+                Dim rejectButton As New DataGridViewButtonColumn()
+                rejectButton.Name = "Reject"
+                rejectButton.HeaderText = "Reject"
+                rejectButton.Text = "Reject"
+                rejectButton.UseColumnTextForButtonValue = True
+                rejectButton.SortMode = DataGridViewColumnSortMode.NotSortable
+                dgvResetRequests.Columns.Add(rejectButton)
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading reset requests: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    'Button Navigation Tabs
+
+    Private Sub dashboard_btn_Click(sender As Object, e As EventArgs) Handles dashboard_btn.Click
+        TabControl1.SelectedTab = TabPage1
+    End Sub
+
+    Private Sub user_mbtn_Click(sender As Object, e As EventArgs) Handles user_mbtn.Click
+        TabControl1.SelectedTab = TabPage2
+    End Sub
+
+    Private Sub file_mbtn_Click(sender As Object, e As EventArgs) Handles file_mbtn.Click
+        TabControl1.SelectedTab = TabPage3
+    End Sub
+
+    Private Sub act_lbtn_Click(sender As Object, e As EventArgs) Handles act_lbtn.Click
+        TabControl1.SelectedTab = tabActivityLogs
+    End Sub
+
+    Private Sub reports_btn_Click(sender As Object, e As EventArgs) Handles reports_btn.Click
+        TabControl1.SelectedTab = TabPage4
+    End Sub
+
+    Private Sub windows_btn_Click(sender As Object, e As EventArgs) Handles windows_btn.Click
+        TabControl1.SelectedTab = TabPage5
+    End Sub
+
+    Private Sub settings_btn_Click(sender As Object, e As EventArgs) Handles settings_btn.Click
+        TabControl1.SelectedTab = TabPage6
+    End Sub
+
+    Private Sub logout_btn_Click(sender As Object, e As EventArgs) Handles logout_btn.Click
+        ' Logout user
+        MessageBox.Show("You have been logged out.", "Logout", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        ' Close the current form
+        Hide()
+
+        ' Show login form again
+        Login.Show()
+    End Sub
+
+
+
+
+
+    '
+    '   '   DASHBOARD TAB 
+    '
+
+
+    '
+    '   '   USER MANAGEMENT TAB
+    '
+
+    Private Sub refresh_btn_Click(sender As Object, e As EventArgs) Handles refresh_btn.Click
+        Try
+            LoadUsers()
+            LoadActivityLogs()
+            LoadPendingUsers()
+            LoadPendingResetRequests()
+            ' Add other here for refresh
+
+            MessageBox.Show("All data refreshed successfully!", "Refreshed", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            MessageBox.Show("Error refreshing data: " & ex.Message)
+        End Try
+    End Sub
+
+
+
+
 
     Private Sub dgvUsers_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvUsers.CellContentClick
         ' Ignore header clicks
@@ -175,70 +358,6 @@ Public Class SuperAdmin
             End Using
         Catch ex As Exception
             MessageBox.Show("Log insert failed: " & ex.Message)
-        End Try
-    End Sub
-
-
-
-    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
-        TabControl1.SelectedTab = TabPage2
-    End Sub
-
-    ' =====================
-    ' Load pending password reset requests
-    ' =====================
-    Private Sub LoadPendingResetRequests()
-        Try
-            Using conn As New NpgsqlConnection(connectionString)
-                conn.Open()
-                Dim query As String = "
-                    SELECT id, full_name, email, status, request_date 
-                    FROM password_reset_requests
-                    WHERE status = 'Pending'
-                    ORDER BY request_date DESC;
-                "
-
-                Dim da As New NpgsqlDataAdapter(query, conn)
-                Dim dt As New DataTable()
-                da.Fill(dt)
-                dgvResetRequests.DataSource = dt
-            End Using
-
-            ' Hide ID column and rename headers
-            dgvResetRequests.Columns("id").Visible = False
-            dgvResetRequests.Columns("full_name").HeaderText = "Full Name"
-            dgvResetRequests.Columns("email").HeaderText = "Email"
-            dgvResetRequests.Columns("status").HeaderText = "Status"
-            dgvResetRequests.Columns("request_date").HeaderText = "Request Date"
-
-            dgvResetRequests.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
-            dgvResetRequests.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-            dgvResetRequests.ReadOnly = True
-
-            ' Add Approve button if not exists
-            If Not dgvResetRequests.Columns.Contains("Approve") Then
-                Dim approveButton As New DataGridViewButtonColumn()
-                approveButton.Name = "Approve"
-                approveButton.HeaderText = "Approve"
-                approveButton.Text = "Approve"
-                approveButton.UseColumnTextForButtonValue = True
-                approveButton.SortMode = DataGridViewColumnSortMode.NotSortable
-                dgvResetRequests.Columns.Add(approveButton)
-            End If
-
-            ' Add Reject button if not exists
-            If Not dgvResetRequests.Columns.Contains("Reject") Then
-                Dim rejectButton As New DataGridViewButtonColumn()
-                rejectButton.Name = "Reject"
-                rejectButton.HeaderText = "Reject"
-                rejectButton.Text = "Reject"
-                rejectButton.UseColumnTextForButtonValue = True
-                rejectButton.SortMode = DataGridViewColumnSortMode.NotSortable
-                dgvResetRequests.Columns.Add(rejectButton)
-            End If
-
-        Catch ex As Exception
-            MessageBox.Show("Error loading reset requests: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
@@ -378,67 +497,6 @@ Public Class SuperAdmin
         'LoadUsers(txtSearchUser.Text)
     End Sub
 
-
-    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
-        TabControl1.SelectedTab = TabPage3
-    End Sub
-
-    '=====================
-    'Activity Logs Tab
-    '=====================
-    Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
-        TabControl1.SelectedTab = tabActivityLogs
-    End Sub
-
-    Private Sub LoadActivityLogs(Optional filter As String = "")
-
-        If dgvActivityLogs.Rows.Count > 0 Then
-            dgvActivityLogs.FirstDisplayedScrollingRowIndex = 0
-        End If
-
-        Try
-            Using conn As New NpgsqlConnection(connectionString)
-                conn.Open()
-                Dim query As String = "
-                SELECT log_date, email, action
-                FROM user_activity_logs
-                ORDER BY log_date DESC
-            "
-
-                If Not String.IsNullOrEmpty(filter) Then
-                    query = "
-                    SELECT log_date, email, action
-                    FROM user_activity_logs
-                    WHERE LOWER(email) LIKE @Filter
-                       OR LOWER(action) LIKE @Filter
-                    ORDER BY log_date DESC
-                "
-                End If
-
-                Using cmd As New NpgsqlCommand(query, conn)
-                    If Not String.IsNullOrEmpty(filter) Then
-                        cmd.Parameters.AddWithValue("@Filter", "%" & filter.ToLower() & "%")
-                    End If
-
-                    Using reader As NpgsqlDataReader = cmd.ExecuteReader()
-                        Dim dt As New DataTable()
-                        dt.Load(reader)
-                        dgvActivityLogs.DataSource = dt
-                    End Using
-                End Using
-            End Using
-
-            ' Style the DataGridView
-            dgvActivityLogs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
-            dgvActivityLogs.Columns("log_date").HeaderText = "Timestamp"
-            dgvActivityLogs.Columns("email").HeaderText = "Email"
-            dgvActivityLogs.Columns("action").HeaderText = "Action Performed"
-
-        Catch ex As Exception
-            MessageBox.Show("Error loading logs: " & ex.Message)
-        End Try
-    End Sub
-
     Private Sub btnRefreshLogs_Click(sender As Object, e As EventArgs) Handles btnRefreshLogs.Click
         LoadActivityLogs()
     End Sub
@@ -447,44 +505,133 @@ Public Class SuperAdmin
         LoadActivityLogs(txtSearchLogs.Text)
     End Sub
 
-
-
-    Private Sub Label6_Click(sender As Object, e As EventArgs) Handles Label6.Click
-        TabControl1.SelectedTab = TabPage4
-    End Sub
-
-    Private Sub Label7_Click(sender As Object, e As EventArgs) Handles Label7.Click
-        TabControl1.SelectedTab = TabPage5
-    End Sub
-
-    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
-        ' Logout user
-        MessageBox.Show("You have been logged out.", "Logout", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-        ' Close the current form (e.g., Dashboard)
-        Hide()
-
-        ' Show login form again
-        Login.Show()
-    End Sub
-
-    Private Sub Label26_Click(sender As Object, e As EventArgs) Handles Label26.Click
-        TabControl1.SelectedTab = TabPage6
-    End Sub
-
-    Private Sub CuiButton1_Click(sender As Object, e As EventArgs) Handles CuiButton1.Click
-        TabControl1.SelectedTab = TabPage1
-    End Sub
-
     Private Sub CuiButton2_Click(sender As Object, e As EventArgs) Handles CuiButton2.Click
         Dim f As New AddUserForm(connectionString)
-        f.StartPosition = FormStartPosition.CenterScreen
         f.Show
     End Sub
 
     Private Sub CuiButton3_Click(sender As Object, e As EventArgs) Handles CuiButton3.Click
-        Dim f As New AddUserForm(connectionString)
-        f.StartPosition = FormStartPosition.CenterScreen
-        f.Show()
+        ' If form is already open, bring it to front
+        If addUserFormInstance IsNot Nothing AndAlso Not addUserFormInstance.IsDisposed Then
+            addUserFormInstance.BringToFront()
+            addUserFormInstance.Focus()
+            Return
+        End If
+
+        ' Otherwise create a new one
+        addUserFormInstance = New AddUserForm(connectionString)
+        addUserFormInstance.StartPosition = FormStartPosition.CenterScreen
+
+        ' When form closes, allow reopening again
+        AddHandler addUserFormInstance.FormClosed,
+            Sub() addUserFormInstance = Nothing
+
+        addUserFormInstance.Show()
     End Sub
+
+
+
+    Private Sub DataGridView5_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView5.CellContentClick
+
+        If e.RowIndex < 0 Then Exit Sub
+
+        Dim selectedId As String = DataGridView5.Rows(e.RowIndex).Cells("id").Value.ToString()
+
+        ' APPROVE BUTTON CLICKED
+        If TypeOf DataGridView5.Columns(e.ColumnIndex) Is DataGridViewButtonColumn AndAlso
+       DataGridView5.Columns(e.ColumnIndex).Name = "ApproveButton" Then
+
+            ApproveUser(selectedId)
+            LoadPendingUsers()
+            LoadUsers() ' reload user management
+
+        End If
+
+        ' REJECT BUTTON CLICKED
+        If TypeOf DataGridView5.Columns(e.ColumnIndex) Is DataGridViewButtonColumn AndAlso
+       DataGridView5.Columns(e.ColumnIndex).Name = "RejectButton" Then
+
+            RejectUser(selectedId)
+            LoadPendingUsers()
+
+        End If
+
+    End Sub
+
+    Private Sub ApproveUser(id As String)
+        Try
+            Using conn As New NpgsqlConnection(connectionString)
+                conn.Open()
+
+                ' STEP 1: Get pending user details
+                Dim selectQuery As String = "SELECT id, full_name, email, role FROM pending_users WHERE id=@id"
+                Dim pendingUser As New DataTable()
+
+                Using cmd As New NpgsqlCommand(selectQuery, conn)
+                    cmd.Parameters.AddWithValue("@id", id)
+                    Using da As New NpgsqlDataAdapter(cmd)
+                        da.Fill(pendingUser)
+                    End Using
+                End Using
+
+                If pendingUser.Rows.Count = 0 Then
+                    MessageBox.Show("User not found in pending list.")
+                    Exit Sub
+                End If
+
+                Dim fullName = pendingUser.Rows(0)("full_name").ToString()
+                Dim email = pendingUser.Rows(0)("email").ToString()
+                Dim role = pendingUser.Rows(0)("role").ToString()
+
+                ' STEP 2: Insert into USERS table
+                Dim insertQuery As String =
+                "INSERT INTO users (id, full_name, email, role) VALUES (@id, @full_name, @email, @role)"
+
+                Using cmdInsert As New NpgsqlCommand(insertQuery, conn)
+                    cmdInsert.Parameters.AddWithValue("@id", id)
+                    cmdInsert.Parameters.AddWithValue("@full_name", fullName)
+                    cmdInsert.Parameters.AddWithValue("@email", email)
+                    cmdInsert.Parameters.AddWithValue("@role", role)
+                    cmdInsert.ExecuteNonQuery()
+                End Using
+
+                ' STEP 3: Delete from pending_users
+                Dim deleteQuery As String = "DELETE FROM pending_users WHERE id=@id"
+                Using cmdDelete As New NpgsqlCommand(deleteQuery, conn)
+                    cmdDelete.Parameters.AddWithValue("@id", id)
+                    cmdDelete.ExecuteNonQuery()
+                End Using
+
+                MessageBox.Show("User approved and moved to active users!")
+
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error approving user: " & ex.Message)
+        End Try
+    End Sub
+
+
+
+    Private Sub RejectUser(id As String)
+        Try
+            Using conn As New NpgsqlConnection(connectionString)
+                conn.Open()
+
+                Dim query As String = "DELETE FROM pending_users WHERE id=@id"
+                Using cmd As New NpgsqlCommand(query, conn)
+                    cmd.Parameters.AddWithValue("@id", id)
+                    cmd.ExecuteNonQuery()
+                End Using
+            End Using
+
+            AddActivityLog("Rejected pending user with ID: " & id)
+
+            MessageBox.Show("User rejected successfully!")
+
+        Catch ex As Exception
+            MessageBox.Show("Error rejecting user: " & ex.Message)
+        End Try
+    End Sub
+
+
 End Class

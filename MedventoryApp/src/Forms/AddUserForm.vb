@@ -40,17 +40,22 @@ Public Class AddUserForm
         Try
             Using conn As New NpgsqlConnection(connectionString)
                 conn.Open()
+                Dim token As String = Guid.NewGuid().ToString()
+
                 Dim query As String = "
-                    INSERT INTO users (id, full_name, email, password, role)
-                    VALUES (gen_random_uuid(), @Name, @Email, ENCODE(DIGEST('temporary123', 'sha256'), 'hex'), @Role)
-                "
+            INSERT INTO pending_users (full_name, email, role, verification_token)
+            VALUES (@FullName, @Email, @Role, @Token)
+        "
+
                 Using cmd As New NpgsqlCommand(query, conn)
-                    cmd.Parameters.AddWithValue("@Name", name)
+                    cmd.Parameters.AddWithValue("@FullName", name)
                     cmd.Parameters.AddWithValue("@Email", email)
                     cmd.Parameters.AddWithValue("@Role", role)
+                    cmd.Parameters.AddWithValue("@Token", token)
                     cmd.ExecuteNonQuery()
                 End Using
             End Using
+
 
             ' ✉️ Send Invitation Email
             SendInvitationEmail(email, name)

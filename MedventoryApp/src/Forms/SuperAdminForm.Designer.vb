@@ -38,13 +38,14 @@ Partial Class SuperAdmin
         Label22 = New Label()
         PictureBox14 = New PictureBox()
         TabPage2 = New TabPage()
+        refresh_btn = New CuoreUI.Controls.cuiButton()
         CuiButton3 = New CuoreUI.Controls.cuiButton()
-        btnRefreshAll = New Button()
         Panel7 = New Panel()
         dgvResetRequests = New DataGridView()
         Label12 = New Label()
         PictureBox4 = New PictureBox()
         Panel5 = New Panel()
+        SiticoneDataGridView1 = New SiticoneNetCoreUI.SiticoneDataGridView()
         DataGridView5 = New DataGridView()
         Label10 = New Label()
         PictureBox2 = New PictureBox()
@@ -117,15 +118,14 @@ Partial Class SuperAdmin
         ToolStripMenuItem2 = New ToolStripMenuItem()
         Panel3 = New Panel()
         Panel1 = New Panel()
-        CuiButton1 = New CuoreUI.Controls.cuiButton()
-        Label26 = New Label()
-        Label8 = New Label()
-        Label7 = New Label()
-        Label5 = New Label()
-        Label6 = New Label()
-        Label4 = New Label()
-        Label3 = New Label()
-        Label2 = New Label()
+        logout_btn = New CuoreUI.Controls.cuiButton()
+        settings_btn = New CuoreUI.Controls.cuiButton()
+        windows_btn = New CuoreUI.Controls.cuiButton()
+        reports_btn = New CuoreUI.Controls.cuiButton()
+        act_lbtn = New CuoreUI.Controls.cuiButton()
+        file_mbtn = New CuoreUI.Controls.cuiButton()
+        user_mbtn = New CuoreUI.Controls.cuiButton()
+        dashboard_btn = New CuoreUI.Controls.cuiButton()
         Panel2 = New Panel()
         Label1 = New Label()
         TabControl1.SuspendLayout()
@@ -144,6 +144,7 @@ Partial Class SuperAdmin
         CType(dgvResetRequests, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox4, ComponentModel.ISupportInitialize).BeginInit()
         Panel5.SuspendLayout()
+        CType(SiticoneDataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         CType(DataGridView5, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox2, ComponentModel.ISupportInitialize).BeginInit()
         Panel4.SuspendLayout()
@@ -366,8 +367,8 @@ Partial Class SuperAdmin
         ' TabPage2
         ' 
         TabPage2.BackColor = Color.Gainsboro
+        TabPage2.Controls.Add(refresh_btn)
         TabPage2.Controls.Add(CuiButton3)
-        TabPage2.Controls.Add(btnRefreshAll)
         TabPage2.Controls.Add(Panel7)
         TabPage2.Controls.Add(Panel5)
         TabPage2.Controls.Add(Panel4)
@@ -377,6 +378,44 @@ Partial Class SuperAdmin
         TabPage2.Size = New Size(1473, 752)
         TabPage2.TabIndex = 1
         TabPage2.Text = "User Management"
+        ' 
+        ' refresh_btn
+        ' 
+        refresh_btn.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        refresh_btn.CheckButton = False
+        refresh_btn.Checked = False
+        refresh_btn.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        refresh_btn.CheckedForeColor = Color.White
+        refresh_btn.CheckedImageTint = Color.White
+        refresh_btn.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        refresh_btn.Content = "Refresh"
+        refresh_btn.DialogResult = DialogResult.None
+        refresh_btn.Font = New Font("Poppins", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        refresh_btn.ForeColor = Color.Black
+        refresh_btn.HoverBackground = Color.White
+        refresh_btn.HoverForeColor = Color.Black
+        refresh_btn.HoverImageTint = Color.White
+        refresh_btn.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        refresh_btn.Image = Nothing
+        refresh_btn.ImageAutoCenter = True
+        refresh_btn.ImageExpand = New Point(0, 0)
+        refresh_btn.ImageOffset = New Point(0, 0)
+        refresh_btn.Location = New Point(260, 9)
+        refresh_btn.Name = "refresh_btn"
+        refresh_btn.NormalBackground = Color.White
+        refresh_btn.NormalForeColor = Color.Black
+        refresh_btn.NormalImageTint = Color.White
+        refresh_btn.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        refresh_btn.OutlineThickness = 1F
+        refresh_btn.PressedBackground = Color.WhiteSmoke
+        refresh_btn.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        refresh_btn.PressedImageTint = Color.White
+        refresh_btn.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        refresh_btn.Rounding = New Padding(8)
+        refresh_btn.Size = New Size(82, 32)
+        refresh_btn.TabIndex = 17
+        refresh_btn.TextAlignment = StringAlignment.Center
+        refresh_btn.TextOffset = New Point(0, 0)
         ' 
         ' CuiButton3
         ' 
@@ -415,15 +454,6 @@ Partial Class SuperAdmin
         CuiButton3.TabIndex = 16
         CuiButton3.TextAlignment = StringAlignment.Center
         CuiButton3.TextOffset = New Point(0, 0)
-        ' 
-        ' btnRefreshAll
-        ' 
-        btnRefreshAll.Location = New Point(260, 18)
-        btnRefreshAll.Name = "btnRefreshAll"
-        btnRefreshAll.Size = New Size(75, 23)
-        btnRefreshAll.TabIndex = 2
-        btnRefreshAll.Text = "Refresh"
-        btnRefreshAll.UseVisualStyleBackColor = True
         ' 
         ' Panel7
         ' 
@@ -469,6 +499,7 @@ Partial Class SuperAdmin
         ' 
         Panel5.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         Panel5.BackColor = Color.WhiteSmoke
+        Panel5.Controls.Add(SiticoneDataGridView1)
         Panel5.Controls.Add(DataGridView5)
         Panel5.Controls.Add(Label10)
         Panel5.Controls.Add(PictureBox2)
@@ -476,6 +507,17 @@ Partial Class SuperAdmin
         Panel5.Name = "Panel5"
         Panel5.Size = New Size(575, 330)
         Panel5.TabIndex = 1
+        ' 
+        ' SiticoneDataGridView1
+        ' 
+        SiticoneDataGridView1.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(48))
+        SiticoneDataGridView1.CellFont = New Font("Segoe UI", 9.5F)
+        SiticoneDataGridView1.DataSource = Nothing
+        SiticoneDataGridView1.HeaderFont = New Font("Segoe UI", 10F, FontStyle.Bold)
+        SiticoneDataGridView1.Location = New Point(13, 44)
+        SiticoneDataGridView1.Name = "SiticoneDataGridView1"
+        SiticoneDataGridView1.Size = New Size(549, 271)
+        SiticoneDataGridView1.TabIndex = 15
         ' 
         ' DataGridView5
         ' 
@@ -572,7 +614,7 @@ Partial Class SuperAdmin
         Panel9.Controls.Add(DataGridView1)
         Panel9.Controls.Add(Label14)
         Panel9.Controls.Add(PictureBox6)
-        Panel9.Location = New Point(744, 384)
+        Panel9.Location = New Point(777, 388)
         Panel9.Name = "Panel9"
         Panel9.Size = New Size(500, 330)
         Panel9.TabIndex = 3
@@ -636,7 +678,7 @@ Partial Class SuperAdmin
         Panel10.BackColor = Color.WhiteSmoke
         Panel10.Controls.Add(Label15)
         Panel10.Controls.Add(PictureBox7)
-        Panel10.Location = New Point(228, 384)
+        Panel10.Location = New Point(261, 388)
         Panel10.Name = "Panel10"
         Panel10.Size = New Size(500, 330)
         Panel10.TabIndex = 4
@@ -664,7 +706,7 @@ Partial Class SuperAdmin
         Panel11.BackColor = Color.WhiteSmoke
         Panel11.Controls.Add(Label16)
         Panel11.Controls.Add(PictureBox8)
-        Panel11.Location = New Point(744, 38)
+        Panel11.Location = New Point(777, 42)
         Panel11.Name = "Panel11"
         Panel11.Size = New Size(500, 330)
         Panel11.TabIndex = 5
@@ -692,7 +734,7 @@ Partial Class SuperAdmin
         Panel12.BackColor = Color.WhiteSmoke
         Panel12.Controls.Add(Label17)
         Panel12.Controls.Add(PictureBox9)
-        Panel12.Location = New Point(228, 38)
+        Panel12.Location = New Point(261, 42)
         Panel12.Name = "Panel12"
         Panel12.Size = New Size(500, 330)
         Panel12.TabIndex = 2
@@ -1097,15 +1139,14 @@ Partial Class SuperAdmin
         ' 
         Panel1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left
         Panel1.BackColor = Color.WhiteSmoke
-        Panel1.Controls.Add(CuiButton1)
-        Panel1.Controls.Add(Label26)
-        Panel1.Controls.Add(Label8)
-        Panel1.Controls.Add(Label7)
-        Panel1.Controls.Add(Label5)
-        Panel1.Controls.Add(Label6)
-        Panel1.Controls.Add(Label4)
-        Panel1.Controls.Add(Label3)
-        Panel1.Controls.Add(Label2)
+        Panel1.Controls.Add(logout_btn)
+        Panel1.Controls.Add(settings_btn)
+        Panel1.Controls.Add(windows_btn)
+        Panel1.Controls.Add(reports_btn)
+        Panel1.Controls.Add(act_lbtn)
+        Panel1.Controls.Add(file_mbtn)
+        Panel1.Controls.Add(user_mbtn)
+        Panel1.Controls.Add(dashboard_btn)
         Panel1.Controls.Add(Panel2)
         Panel1.Controls.Add(Label1)
         Panel1.Location = New Point(2, 30)
@@ -1113,123 +1154,302 @@ Partial Class SuperAdmin
         Panel1.Size = New Size(230, 750)
         Panel1.TabIndex = 5
         ' 
-        ' CuiButton1
+        ' logout_btn
         ' 
-        CuiButton1.CheckButton = False
-        CuiButton1.Checked = False
-        CuiButton1.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
-        CuiButton1.CheckedForeColor = Color.White
-        CuiButton1.CheckedImageTint = Color.White
-        CuiButton1.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
-        CuiButton1.Content = "Dashboard"
-        CuiButton1.DialogResult = DialogResult.None
-        CuiButton1.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        CuiButton1.ForeColor = Color.Black
-        CuiButton1.HoverBackground = Color.White
-        CuiButton1.HoverForeColor = Color.Black
-        CuiButton1.HoverImageTint = Color.White
-        CuiButton1.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
-        CuiButton1.Image = Nothing
-        CuiButton1.ImageAutoCenter = True
-        CuiButton1.ImageExpand = New Point(0, 0)
-        CuiButton1.ImageOffset = New Point(0, 0)
-        CuiButton1.Location = New Point(52, 113)
-        CuiButton1.Name = "CuiButton1"
-        CuiButton1.NormalBackground = Color.White
-        CuiButton1.NormalForeColor = Color.Black
-        CuiButton1.NormalImageTint = Color.White
-        CuiButton1.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
-        CuiButton1.OutlineThickness = 1F
-        CuiButton1.PressedBackground = Color.WhiteSmoke
-        CuiButton1.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
-        CuiButton1.PressedImageTint = Color.White
-        CuiButton1.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
-        CuiButton1.Rounding = New Padding(8)
-        CuiButton1.Size = New Size(134, 50)
-        CuiButton1.TabIndex = 15
-        CuiButton1.TextAlignment = StringAlignment.Center
-        CuiButton1.TextOffset = New Point(0, 0)
+        logout_btn.Anchor = AnchorStyles.Bottom
+        logout_btn.CheckButton = False
+        logout_btn.Checked = False
+        logout_btn.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        logout_btn.CheckedForeColor = Color.White
+        logout_btn.CheckedImageTint = Color.White
+        logout_btn.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        logout_btn.Content = "Log out"
+        logout_btn.DialogResult = DialogResult.None
+        logout_btn.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        logout_btn.ForeColor = Color.Black
+        logout_btn.HoverBackground = Color.Gainsboro
+        logout_btn.HoverForeColor = Color.Black
+        logout_btn.HoverImageTint = Color.White
+        logout_btn.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        logout_btn.Image = Nothing
+        logout_btn.ImageAutoCenter = True
+        logout_btn.ImageExpand = New Point(0, 0)
+        logout_btn.ImageOffset = New Point(0, 0)
+        logout_btn.Location = New Point(20, 676)
+        logout_btn.Name = "logout_btn"
+        logout_btn.NormalBackground = Color.White
+        logout_btn.NormalForeColor = Color.Black
+        logout_btn.NormalImageTint = Color.White
+        logout_btn.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        logout_btn.OutlineThickness = 1F
+        logout_btn.PressedBackground = SystemColors.Window
+        logout_btn.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        logout_btn.PressedImageTint = Color.White
+        logout_btn.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        logout_btn.Rounding = New Padding(8)
+        logout_btn.Size = New Size(189, 50)
+        logout_btn.TabIndex = 22
+        logout_btn.TextAlignment = StringAlignment.Center
+        logout_btn.TextOffset = New Point(0, 0)
         ' 
-        ' Label26
+        ' settings_btn
         ' 
-        Label26.AutoSize = True
-        Label26.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label26.Location = New Point(68, 521)
-        Label26.Name = "Label26"
-        Label26.Size = New Size(86, 28)
-        Label26.TabIndex = 9
-        Label26.Text = "Settings"
+        settings_btn.CheckButton = False
+        settings_btn.Checked = False
+        settings_btn.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        settings_btn.CheckedForeColor = Color.White
+        settings_btn.CheckedImageTint = Color.White
+        settings_btn.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        settings_btn.Content = "Settings"
+        settings_btn.DialogResult = DialogResult.None
+        settings_btn.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        settings_btn.ForeColor = Color.Black
+        settings_btn.HoverBackground = Color.Gainsboro
+        settings_btn.HoverForeColor = Color.Black
+        settings_btn.HoverImageTint = Color.White
+        settings_btn.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        settings_btn.Image = Nothing
+        settings_btn.ImageAutoCenter = True
+        settings_btn.ImageExpand = New Point(0, 0)
+        settings_btn.ImageOffset = New Point(0, 0)
+        settings_btn.Location = New Point(20, 529)
+        settings_btn.Name = "settings_btn"
+        settings_btn.NormalBackground = Color.White
+        settings_btn.NormalForeColor = Color.Black
+        settings_btn.NormalImageTint = Color.White
+        settings_btn.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        settings_btn.OutlineThickness = 1F
+        settings_btn.PressedBackground = Color.WhiteSmoke
+        settings_btn.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        settings_btn.PressedImageTint = Color.White
+        settings_btn.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        settings_btn.Rounding = New Padding(8)
+        settings_btn.Size = New Size(189, 50)
+        settings_btn.TabIndex = 21
+        settings_btn.TextAlignment = StringAlignment.Center
+        settings_btn.TextOffset = New Point(0, 0)
         ' 
-        ' Label8
+        ' windows_btn
         ' 
-        Label8.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
-        Label8.AutoSize = True
-        Label8.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label8.Location = New Point(74, 687)
-        Label8.Name = "Label8"
-        Label8.Size = New Size(77, 28)
-        Label8.TabIndex = 8
-        Label8.Text = "Log out"
+        windows_btn.CheckButton = False
+        windows_btn.Checked = False
+        windows_btn.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        windows_btn.CheckedForeColor = Color.White
+        windows_btn.CheckedImageTint = Color.White
+        windows_btn.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        windows_btn.Content = "Windows"
+        windows_btn.DialogResult = DialogResult.None
+        windows_btn.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        windows_btn.ForeColor = Color.Black
+        windows_btn.HoverBackground = Color.Gainsboro
+        windows_btn.HoverForeColor = Color.Black
+        windows_btn.HoverImageTint = Color.White
+        windows_btn.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        windows_btn.Image = Nothing
+        windows_btn.ImageAutoCenter = True
+        windows_btn.ImageExpand = New Point(0, 0)
+        windows_btn.ImageOffset = New Point(0, 0)
+        windows_btn.Location = New Point(20, 463)
+        windows_btn.Name = "windows_btn"
+        windows_btn.NormalBackground = Color.White
+        windows_btn.NormalForeColor = Color.Black
+        windows_btn.NormalImageTint = Color.White
+        windows_btn.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        windows_btn.OutlineThickness = 1F
+        windows_btn.PressedBackground = Color.WhiteSmoke
+        windows_btn.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        windows_btn.PressedImageTint = Color.White
+        windows_btn.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        windows_btn.Rounding = New Padding(8)
+        windows_btn.Size = New Size(189, 50)
+        windows_btn.TabIndex = 20
+        windows_btn.TextAlignment = StringAlignment.Center
+        windows_btn.TextOffset = New Point(0, 0)
         ' 
-        ' Label7
+        ' reports_btn
         ' 
-        Label7.AutoSize = True
-        Label7.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label7.Location = New Point(68, 458)
-        Label7.Name = "Label7"
-        Label7.Size = New Size(92, 28)
-        Label7.TabIndex = 7
-        Label7.Text = "Windows"
+        reports_btn.CheckButton = False
+        reports_btn.Checked = False
+        reports_btn.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        reports_btn.CheckedForeColor = Color.White
+        reports_btn.CheckedImageTint = Color.White
+        reports_btn.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        reports_btn.Content = "Reports"
+        reports_btn.DialogResult = DialogResult.None
+        reports_btn.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        reports_btn.ForeColor = Color.Black
+        reports_btn.HoverBackground = Color.Gainsboro
+        reports_btn.HoverForeColor = Color.Black
+        reports_btn.HoverImageTint = Color.White
+        reports_btn.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        reports_btn.Image = Nothing
+        reports_btn.ImageAutoCenter = True
+        reports_btn.ImageExpand = New Point(0, 0)
+        reports_btn.ImageOffset = New Point(0, 0)
+        reports_btn.Location = New Point(20, 398)
+        reports_btn.Name = "reports_btn"
+        reports_btn.NormalBackground = Color.White
+        reports_btn.NormalForeColor = Color.Black
+        reports_btn.NormalImageTint = Color.White
+        reports_btn.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        reports_btn.OutlineThickness = 1F
+        reports_btn.PressedBackground = Color.WhiteSmoke
+        reports_btn.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        reports_btn.PressedImageTint = Color.White
+        reports_btn.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        reports_btn.Rounding = New Padding(8)
+        reports_btn.Size = New Size(189, 50)
+        reports_btn.TabIndex = 19
+        reports_btn.TextAlignment = StringAlignment.Center
+        reports_btn.TextOffset = New Point(0, 0)
         ' 
-        ' Label5
+        ' act_lbtn
         ' 
-        Label5.AutoSize = True
-        Label5.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label5.Location = New Point(52, 333)
-        Label5.Name = "Label5"
-        Label5.Size = New Size(125, 28)
-        Label5.TabIndex = 5
-        Label5.Text = "Activity Logs"
+        act_lbtn.CheckButton = False
+        act_lbtn.Checked = False
+        act_lbtn.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        act_lbtn.CheckedForeColor = Color.White
+        act_lbtn.CheckedImageTint = Color.White
+        act_lbtn.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        act_lbtn.Content = "Activity Logs"
+        act_lbtn.DialogResult = DialogResult.None
+        act_lbtn.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        act_lbtn.ForeColor = Color.Black
+        act_lbtn.HoverBackground = Color.Gainsboro
+        act_lbtn.HoverForeColor = Color.Black
+        act_lbtn.HoverImageTint = Color.White
+        act_lbtn.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        act_lbtn.Image = Nothing
+        act_lbtn.ImageAutoCenter = True
+        act_lbtn.ImageExpand = New Point(0, 0)
+        act_lbtn.ImageOffset = New Point(0, 0)
+        act_lbtn.Location = New Point(20, 331)
+        act_lbtn.Name = "act_lbtn"
+        act_lbtn.NormalBackground = Color.White
+        act_lbtn.NormalForeColor = Color.Black
+        act_lbtn.NormalImageTint = Color.White
+        act_lbtn.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        act_lbtn.OutlineThickness = 1F
+        act_lbtn.PressedBackground = Color.WhiteSmoke
+        act_lbtn.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        act_lbtn.PressedImageTint = Color.White
+        act_lbtn.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        act_lbtn.Rounding = New Padding(8)
+        act_lbtn.Size = New Size(189, 50)
+        act_lbtn.TabIndex = 18
+        act_lbtn.TextAlignment = StringAlignment.Center
+        act_lbtn.TextOffset = New Point(0, 0)
         ' 
-        ' Label6
+        ' file_mbtn
         ' 
-        Label6.AutoSize = True
-        Label6.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label6.Location = New Point(74, 394)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(81, 28)
-        Label6.TabIndex = 6
-        Label6.Text = "Reports"
+        file_mbtn.CheckButton = False
+        file_mbtn.Checked = False
+        file_mbtn.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        file_mbtn.CheckedForeColor = Color.White
+        file_mbtn.CheckedImageTint = Color.White
+        file_mbtn.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        file_mbtn.Content = "File Management"
+        file_mbtn.DialogResult = DialogResult.None
+        file_mbtn.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        file_mbtn.ForeColor = Color.Black
+        file_mbtn.HoverBackground = Color.Gainsboro
+        file_mbtn.HoverForeColor = Color.Black
+        file_mbtn.HoverImageTint = Color.White
+        file_mbtn.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        file_mbtn.Image = Nothing
+        file_mbtn.ImageAutoCenter = True
+        file_mbtn.ImageExpand = New Point(0, 0)
+        file_mbtn.ImageOffset = New Point(0, 0)
+        file_mbtn.Location = New Point(20, 265)
+        file_mbtn.Name = "file_mbtn"
+        file_mbtn.NormalBackground = Color.White
+        file_mbtn.NormalForeColor = Color.Black
+        file_mbtn.NormalImageTint = Color.White
+        file_mbtn.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        file_mbtn.OutlineThickness = 1F
+        file_mbtn.PressedBackground = Color.WhiteSmoke
+        file_mbtn.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        file_mbtn.PressedImageTint = Color.White
+        file_mbtn.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        file_mbtn.Rounding = New Padding(8)
+        file_mbtn.Size = New Size(189, 50)
+        file_mbtn.TabIndex = 17
+        file_mbtn.TextAlignment = StringAlignment.Center
+        file_mbtn.TextOffset = New Point(0, 0)
         ' 
-        ' Label4
+        ' user_mbtn
         ' 
-        Label4.AutoSize = True
-        Label4.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label4.Location = New Point(34, 267)
-        Label4.Name = "Label4"
-        Label4.Size = New Size(167, 28)
-        Label4.TabIndex = 5
-        Label4.Text = "File Management"
+        user_mbtn.CheckButton = False
+        user_mbtn.Checked = False
+        user_mbtn.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        user_mbtn.CheckedForeColor = Color.White
+        user_mbtn.CheckedImageTint = Color.White
+        user_mbtn.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        user_mbtn.Content = "User Management"
+        user_mbtn.DialogResult = DialogResult.None
+        user_mbtn.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        user_mbtn.ForeColor = Color.Black
+        user_mbtn.HoverBackground = Color.Gainsboro
+        user_mbtn.HoverForeColor = Color.Black
+        user_mbtn.HoverImageTint = Color.White
+        user_mbtn.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        user_mbtn.Image = Nothing
+        user_mbtn.ImageAutoCenter = True
+        user_mbtn.ImageExpand = New Point(0, 0)
+        user_mbtn.ImageOffset = New Point(0, 0)
+        user_mbtn.Location = New Point(20, 200)
+        user_mbtn.Name = "user_mbtn"
+        user_mbtn.NormalBackground = Color.White
+        user_mbtn.NormalForeColor = Color.Black
+        user_mbtn.NormalImageTint = Color.White
+        user_mbtn.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        user_mbtn.OutlineThickness = 1F
+        user_mbtn.PressedBackground = Color.WhiteSmoke
+        user_mbtn.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        user_mbtn.PressedImageTint = Color.White
+        user_mbtn.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        user_mbtn.Rounding = New Padding(8)
+        user_mbtn.Size = New Size(189, 50)
+        user_mbtn.TabIndex = 16
+        user_mbtn.TextAlignment = StringAlignment.Center
+        user_mbtn.TextOffset = New Point(0, 0)
         ' 
-        ' Label3
+        ' dashboard_btn
         ' 
-        Label3.AutoSize = True
-        Label3.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label3.Location = New Point(27, 199)
-        Label3.Name = "Label3"
-        Label3.Size = New Size(177, 28)
-        Label3.TabIndex = 4
-        Label3.Text = "User Management"
-        ' 
-        ' Label2
-        ' 
-        Label2.AutoSize = True
-        Label2.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(59, 135)
-        Label2.Name = "Label2"
-        Label2.Size = New Size(111, 28)
-        Label2.TabIndex = 3
-        Label2.Text = "Dashboard"
+        dashboard_btn.CheckButton = False
+        dashboard_btn.Checked = False
+        dashboard_btn.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        dashboard_btn.CheckedForeColor = Color.White
+        dashboard_btn.CheckedImageTint = Color.White
+        dashboard_btn.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        dashboard_btn.Content = "Dashboard"
+        dashboard_btn.DialogResult = DialogResult.None
+        dashboard_btn.Font = New Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        dashboard_btn.ForeColor = Color.Black
+        dashboard_btn.HoverBackground = Color.Gainsboro
+        dashboard_btn.HoverForeColor = Color.Black
+        dashboard_btn.HoverImageTint = Color.White
+        dashboard_btn.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        dashboard_btn.Image = Nothing
+        dashboard_btn.ImageAutoCenter = True
+        dashboard_btn.ImageExpand = New Point(0, 0)
+        dashboard_btn.ImageOffset = New Point(0, 0)
+        dashboard_btn.Location = New Point(20, 134)
+        dashboard_btn.Name = "dashboard_btn"
+        dashboard_btn.NormalBackground = Color.White
+        dashboard_btn.NormalForeColor = Color.Black
+        dashboard_btn.NormalImageTint = Color.White
+        dashboard_btn.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        dashboard_btn.OutlineThickness = 1F
+        dashboard_btn.PressedBackground = Color.WhiteSmoke
+        dashboard_btn.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        dashboard_btn.PressedImageTint = Color.White
+        dashboard_btn.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        dashboard_btn.Rounding = New Padding(8)
+        dashboard_btn.Size = New Size(189, 50)
+        dashboard_btn.TabIndex = 15
+        dashboard_btn.TextAlignment = StringAlignment.Center
+        dashboard_btn.TextOffset = New Point(0, 0)
         ' 
         ' Panel2
         ' 
@@ -1282,6 +1502,7 @@ Partial Class SuperAdmin
         CType(PictureBox4, ComponentModel.ISupportInitialize).EndInit()
         Panel5.ResumeLayout(False)
         Panel5.PerformLayout()
+        CType(SiticoneDataGridView1, ComponentModel.ISupportInitialize).EndInit()
         CType(DataGridView5, ComponentModel.ISupportInitialize).EndInit()
         CType(PictureBox2, ComponentModel.ISupportInitialize).EndInit()
         Panel4.ResumeLayout(False)
@@ -1351,13 +1572,6 @@ Partial Class SuperAdmin
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label1 As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label8 As Label
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label3 As Label
     Friend WithEvents Panel7 As Panel
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Panel4 As Panel
@@ -1418,7 +1632,6 @@ Partial Class SuperAdmin
     Friend WithEvents PictureBox14 As PictureBox
     Friend WithEvents DataGridView5 As DataGridView
     Friend WithEvents dgvUsers As DataGridView
-    Friend WithEvents btnRefreshAll As Button
     Friend WithEvents tabActivityLogs As TabPage
     Friend WithEvents btnRefreshLogs As Button
     Friend WithEvents Panel18 As Panel
@@ -1434,9 +1647,17 @@ Partial Class SuperAdmin
     Friend WithEvents dgvActivityLogs As DataGridView
     Friend WithEvents Label25 As Label
     Friend WithEvents PictureBox17 As PictureBox
-    Friend WithEvents Label26 As Label
     Friend WithEvents txtSearchUser As TextBox
-    Friend WithEvents CuiButton1 As CuoreUI.Controls.cuiButton
+    Friend WithEvents dashboard_btn As CuoreUI.Controls.cuiButton
     Friend WithEvents CuiButton2 As CuoreUI.Controls.cuiButton
     Friend WithEvents CuiButton3 As CuoreUI.Controls.cuiButton
+    Friend WithEvents SiticoneDataGridView1 As SiticoneNetCoreUI.SiticoneDataGridView
+    Friend WithEvents user_mbtn As CuoreUI.Controls.cuiButton
+    Friend WithEvents file_mbtn As CuoreUI.Controls.cuiButton
+    Friend WithEvents logout_btn As CuoreUI.Controls.cuiButton
+    Friend WithEvents settings_btn As CuoreUI.Controls.cuiButton
+    Friend WithEvents windows_btn As CuoreUI.Controls.cuiButton
+    Friend WithEvents reports_btn As CuoreUI.Controls.cuiButton
+    Friend WithEvents act_lbtn As CuoreUI.Controls.cuiButton
+    Friend WithEvents refresh_btn As CuoreUI.Controls.cuiButton
 End Class
