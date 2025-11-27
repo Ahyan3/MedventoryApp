@@ -38,18 +38,25 @@ Partial Class SuperAdmin
         Label22 = New Label()
         PictureBox14 = New PictureBox()
         TabPage2 = New TabPage()
+        user_viewbtn = New CuoreUI.Controls.cuiButton()
+        user_deletebtn = New CuoreUI.Controls.cuiButton()
+        user_editbtn = New CuoreUI.Controls.cuiButton()
         refresh_btn = New CuoreUI.Controls.cuiButton()
-        CuiButton3 = New CuoreUI.Controls.cuiButton()
+        user_addbtn = New CuoreUI.Controls.cuiButton()
         Panel7 = New Panel()
+        SiticoneDataGridView2 = New SiticoneNetCoreUI.SiticoneDataGridView()
         dgvResetRequests = New DataGridView()
         Label12 = New Label()
         PictureBox4 = New PictureBox()
         Panel5 = New Panel()
+        pending_approvebtn = New CuoreUI.Controls.cuiButton()
+        pending_rejectbtn = New CuoreUI.Controls.cuiButton()
         SiticoneDataGridView1 = New SiticoneNetCoreUI.SiticoneDataGridView()
         DataGridView5 = New DataGridView()
         Label10 = New Label()
         PictureBox2 = New PictureBox()
         Panel4 = New Panel()
+        SiticoneDataGridView3 = New SiticoneNetCoreUI.SiticoneDataGridView()
         txtSearchUser = New TextBox()
         dgvUsers = New DataGridView()
         Label9 = New Label()
@@ -128,6 +135,8 @@ Partial Class SuperAdmin
         dashboard_btn = New CuoreUI.Controls.cuiButton()
         Panel2 = New Panel()
         Label1 = New Label()
+        CuiButton1 = New CuoreUI.Controls.cuiButton()
+        CuiButton3 = New CuoreUI.Controls.cuiButton()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         Panel6.SuspendLayout()
@@ -141,6 +150,7 @@ Partial Class SuperAdmin
         CType(PictureBox14, ComponentModel.ISupportInitialize).BeginInit()
         TabPage2.SuspendLayout()
         Panel7.SuspendLayout()
+        CType(SiticoneDataGridView2, ComponentModel.ISupportInitialize).BeginInit()
         CType(dgvResetRequests, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox4, ComponentModel.ISupportInitialize).BeginInit()
         Panel5.SuspendLayout()
@@ -148,6 +158,7 @@ Partial Class SuperAdmin
         CType(DataGridView5, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox2, ComponentModel.ISupportInitialize).BeginInit()
         Panel4.SuspendLayout()
+        CType(SiticoneDataGridView3, ComponentModel.ISupportInitialize).BeginInit()
         CType(dgvUsers, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         TabPage3.SuspendLayout()
@@ -367,8 +378,11 @@ Partial Class SuperAdmin
         ' TabPage2
         ' 
         TabPage2.BackColor = Color.Gainsboro
+        TabPage2.Controls.Add(user_viewbtn)
+        TabPage2.Controls.Add(user_deletebtn)
+        TabPage2.Controls.Add(user_editbtn)
         TabPage2.Controls.Add(refresh_btn)
-        TabPage2.Controls.Add(CuiButton3)
+        TabPage2.Controls.Add(user_addbtn)
         TabPage2.Controls.Add(Panel7)
         TabPage2.Controls.Add(Panel5)
         TabPage2.Controls.Add(Panel4)
@@ -378,6 +392,120 @@ Partial Class SuperAdmin
         TabPage2.Size = New Size(1473, 752)
         TabPage2.TabIndex = 1
         TabPage2.Text = "User Management"
+        ' 
+        ' user_viewbtn
+        ' 
+        user_viewbtn.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        user_viewbtn.CheckButton = False
+        user_viewbtn.Checked = False
+        user_viewbtn.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        user_viewbtn.CheckedForeColor = Color.White
+        user_viewbtn.CheckedImageTint = Color.White
+        user_viewbtn.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        user_viewbtn.Content = "View"
+        user_viewbtn.DialogResult = DialogResult.None
+        user_viewbtn.Font = New Font("Poppins Medium", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        user_viewbtn.ForeColor = Color.Black
+        user_viewbtn.HoverBackground = Color.Gainsboro
+        user_viewbtn.HoverForeColor = Color.Black
+        user_viewbtn.HoverImageTint = Color.White
+        user_viewbtn.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        user_viewbtn.Image = Nothing
+        user_viewbtn.ImageAutoCenter = True
+        user_viewbtn.ImageExpand = New Point(0, 0)
+        user_viewbtn.ImageOffset = New Point(0, 0)
+        user_viewbtn.Location = New Point(640, 9)
+        user_viewbtn.Name = "user_viewbtn"
+        user_viewbtn.NormalBackground = Color.White
+        user_viewbtn.NormalForeColor = Color.Black
+        user_viewbtn.NormalImageTint = Color.White
+        user_viewbtn.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        user_viewbtn.OutlineThickness = 1F
+        user_viewbtn.PressedBackground = Color.WhiteSmoke
+        user_viewbtn.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        user_viewbtn.PressedImageTint = Color.White
+        user_viewbtn.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        user_viewbtn.Rounding = New Padding(8)
+        user_viewbtn.Size = New Size(61, 32)
+        user_viewbtn.TabIndex = 20
+        user_viewbtn.TextAlignment = StringAlignment.Center
+        user_viewbtn.TextOffset = New Point(0, 0)
+        ' 
+        ' user_deletebtn
+        ' 
+        user_deletebtn.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        user_deletebtn.CheckButton = False
+        user_deletebtn.Checked = False
+        user_deletebtn.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        user_deletebtn.CheckedForeColor = Color.White
+        user_deletebtn.CheckedImageTint = Color.White
+        user_deletebtn.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        user_deletebtn.Content = "Delete"
+        user_deletebtn.DialogResult = DialogResult.None
+        user_deletebtn.Font = New Font("Poppins Medium", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        user_deletebtn.ForeColor = Color.Black
+        user_deletebtn.HoverBackground = Color.Gainsboro
+        user_deletebtn.HoverForeColor = Color.Black
+        user_deletebtn.HoverImageTint = Color.White
+        user_deletebtn.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        user_deletebtn.Image = Nothing
+        user_deletebtn.ImageAutoCenter = True
+        user_deletebtn.ImageExpand = New Point(0, 0)
+        user_deletebtn.ImageOffset = New Point(0, 0)
+        user_deletebtn.Location = New Point(774, 9)
+        user_deletebtn.Name = "user_deletebtn"
+        user_deletebtn.NormalBackground = Color.White
+        user_deletebtn.NormalForeColor = Color.Black
+        user_deletebtn.NormalImageTint = Color.White
+        user_deletebtn.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        user_deletebtn.OutlineThickness = 1F
+        user_deletebtn.PressedBackground = Color.WhiteSmoke
+        user_deletebtn.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        user_deletebtn.PressedImageTint = Color.White
+        user_deletebtn.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        user_deletebtn.Rounding = New Padding(8)
+        user_deletebtn.Size = New Size(61, 32)
+        user_deletebtn.TabIndex = 19
+        user_deletebtn.TextAlignment = StringAlignment.Center
+        user_deletebtn.TextOffset = New Point(0, 0)
+        ' 
+        ' user_editbtn
+        ' 
+        user_editbtn.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        user_editbtn.CheckButton = False
+        user_editbtn.Checked = False
+        user_editbtn.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        user_editbtn.CheckedForeColor = Color.White
+        user_editbtn.CheckedImageTint = Color.White
+        user_editbtn.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        user_editbtn.Content = "Edit"
+        user_editbtn.DialogResult = DialogResult.None
+        user_editbtn.Font = New Font("Poppins Medium", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        user_editbtn.ForeColor = Color.Black
+        user_editbtn.HoverBackground = Color.Gainsboro
+        user_editbtn.HoverForeColor = Color.Black
+        user_editbtn.HoverImageTint = Color.White
+        user_editbtn.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        user_editbtn.Image = Nothing
+        user_editbtn.ImageAutoCenter = True
+        user_editbtn.ImageExpand = New Point(0, 0)
+        user_editbtn.ImageOffset = New Point(0, 0)
+        user_editbtn.Location = New Point(707, 9)
+        user_editbtn.Name = "user_editbtn"
+        user_editbtn.NormalBackground = Color.White
+        user_editbtn.NormalForeColor = Color.Black
+        user_editbtn.NormalImageTint = Color.White
+        user_editbtn.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        user_editbtn.OutlineThickness = 1F
+        user_editbtn.PressedBackground = Color.WhiteSmoke
+        user_editbtn.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        user_editbtn.PressedImageTint = Color.White
+        user_editbtn.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        user_editbtn.Rounding = New Padding(8)
+        user_editbtn.Size = New Size(61, 32)
+        user_editbtn.TabIndex = 18
+        user_editbtn.TextAlignment = StringAlignment.Center
+        user_editbtn.TextOffset = New Point(0, 0)
         ' 
         ' refresh_btn
         ' 
@@ -417,48 +545,51 @@ Partial Class SuperAdmin
         refresh_btn.TextAlignment = StringAlignment.Center
         refresh_btn.TextOffset = New Point(0, 0)
         ' 
-        ' CuiButton3
+        ' user_addbtn
         ' 
-        CuiButton3.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        CuiButton3.CheckButton = False
-        CuiButton3.Checked = False
-        CuiButton3.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
-        CuiButton3.CheckedForeColor = Color.White
-        CuiButton3.CheckedImageTint = Color.White
-        CuiButton3.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
-        CuiButton3.Content = "Add"
-        CuiButton3.DialogResult = DialogResult.None
-        CuiButton3.Font = New Font("Poppins Medium", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        CuiButton3.ForeColor = Color.Black
-        CuiButton3.HoverBackground = Color.White
-        CuiButton3.HoverForeColor = Color.Black
-        CuiButton3.HoverImageTint = Color.White
-        CuiButton3.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
-        CuiButton3.Image = Nothing
-        CuiButton3.ImageAutoCenter = True
-        CuiButton3.ImageExpand = New Point(0, 0)
-        CuiButton3.ImageOffset = New Point(0, 0)
-        CuiButton3.Location = New Point(1378, 9)
-        CuiButton3.Name = "CuiButton3"
-        CuiButton3.NormalBackground = Color.White
-        CuiButton3.NormalForeColor = Color.Black
-        CuiButton3.NormalImageTint = Color.White
-        CuiButton3.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
-        CuiButton3.OutlineThickness = 1F
-        CuiButton3.PressedBackground = Color.WhiteSmoke
-        CuiButton3.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
-        CuiButton3.PressedImageTint = Color.White
-        CuiButton3.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
-        CuiButton3.Rounding = New Padding(8)
-        CuiButton3.Size = New Size(61, 32)
-        CuiButton3.TabIndex = 16
-        CuiButton3.TextAlignment = StringAlignment.Center
-        CuiButton3.TextOffset = New Point(0, 0)
+        user_addbtn.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        user_addbtn.CheckButton = False
+        user_addbtn.Checked = False
+        user_addbtn.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        user_addbtn.CheckedForeColor = Color.White
+        user_addbtn.CheckedImageTint = Color.White
+        user_addbtn.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        user_addbtn.Content = "Add"
+        user_addbtn.DialogResult = DialogResult.None
+        user_addbtn.Font = New Font("Poppins Medium", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        user_addbtn.ForeColor = Color.Black
+        user_addbtn.HoverBackground = Color.Gainsboro
+        user_addbtn.HoverForeColor = Color.Black
+        user_addbtn.HoverImageTint = Color.White
+        user_addbtn.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        user_addbtn.Image = Nothing
+        user_addbtn.ImageAutoCenter = True
+        user_addbtn.ImageExpand = New Point(0, 0)
+        user_addbtn.ImageOffset = New Point(0, 0)
+        user_addbtn.Location = New Point(573, 9)
+        user_addbtn.Name = "user_addbtn"
+        user_addbtn.NormalBackground = Color.White
+        user_addbtn.NormalForeColor = Color.Black
+        user_addbtn.NormalImageTint = Color.White
+        user_addbtn.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        user_addbtn.OutlineThickness = 1F
+        user_addbtn.PressedBackground = Color.WhiteSmoke
+        user_addbtn.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        user_addbtn.PressedImageTint = Color.White
+        user_addbtn.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        user_addbtn.Rounding = New Padding(8)
+        user_addbtn.Size = New Size(61, 32)
+        user_addbtn.TabIndex = 16
+        user_addbtn.TextAlignment = StringAlignment.Center
+        user_addbtn.TextOffset = New Point(0, 0)
         ' 
         ' Panel7
         ' 
-        Panel7.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Right
+        Panel7.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
         Panel7.BackColor = Color.WhiteSmoke
+        Panel7.Controls.Add(CuiButton3)
+        Panel7.Controls.Add(CuiButton1)
+        Panel7.Controls.Add(SiticoneDataGridView2)
         Panel7.Controls.Add(dgvResetRequests)
         Panel7.Controls.Add(Label12)
         Panel7.Controls.Add(PictureBox4)
@@ -466,6 +597,18 @@ Partial Class SuperAdmin
         Panel7.Name = "Panel7"
         Panel7.Size = New Size(575, 330)
         Panel7.TabIndex = 1
+        ' 
+        ' SiticoneDataGridView2
+        ' 
+        SiticoneDataGridView2.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom
+        SiticoneDataGridView2.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(48))
+        SiticoneDataGridView2.CellFont = New Font("Segoe UI", 9.5F)
+        SiticoneDataGridView2.DataSource = Nothing
+        SiticoneDataGridView2.HeaderFont = New Font("Segoe UI", 10F, FontStyle.Bold)
+        SiticoneDataGridView2.Location = New Point(13, 135)
+        SiticoneDataGridView2.Name = "SiticoneDataGridView2"
+        SiticoneDataGridView2.Size = New Size(549, 180)
+        SiticoneDataGridView2.TabIndex = 16
         ' 
         ' dgvResetRequests
         ' 
@@ -489,7 +632,7 @@ Partial Class SuperAdmin
         ' 
         ' PictureBox4
         ' 
-        PictureBox4.Location = New Point(537, 13)
+        PictureBox4.Location = New Point(537, 11)
         PictureBox4.Name = "PictureBox4"
         PictureBox4.Size = New Size(25, 25)
         PictureBox4.TabIndex = 2
@@ -497,8 +640,10 @@ Partial Class SuperAdmin
         ' 
         ' Panel5
         ' 
-        Panel5.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        Panel5.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Right
         Panel5.BackColor = Color.WhiteSmoke
+        Panel5.Controls.Add(pending_approvebtn)
+        Panel5.Controls.Add(pending_rejectbtn)
         Panel5.Controls.Add(SiticoneDataGridView1)
         Panel5.Controls.Add(DataGridView5)
         Panel5.Controls.Add(Label10)
@@ -508,15 +653,91 @@ Partial Class SuperAdmin
         Panel5.Size = New Size(575, 330)
         Panel5.TabIndex = 1
         ' 
+        ' pending_approvebtn
+        ' 
+        pending_approvebtn.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        pending_approvebtn.CheckButton = False
+        pending_approvebtn.Checked = False
+        pending_approvebtn.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        pending_approvebtn.CheckedForeColor = Color.White
+        pending_approvebtn.CheckedImageTint = Color.White
+        pending_approvebtn.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        pending_approvebtn.Content = "Approve"
+        pending_approvebtn.DialogResult = DialogResult.None
+        pending_approvebtn.Font = New Font("Poppins", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        pending_approvebtn.ForeColor = Color.Black
+        pending_approvebtn.HoverBackground = Color.Gainsboro
+        pending_approvebtn.HoverForeColor = Color.Black
+        pending_approvebtn.HoverImageTint = Color.White
+        pending_approvebtn.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        pending_approvebtn.Image = Nothing
+        pending_approvebtn.ImageAutoCenter = True
+        pending_approvebtn.ImageExpand = New Point(0, 0)
+        pending_approvebtn.ImageOffset = New Point(0, 0)
+        pending_approvebtn.Location = New Point(379, 10)
+        pending_approvebtn.Name = "pending_approvebtn"
+        pending_approvebtn.NormalBackground = Color.White
+        pending_approvebtn.NormalForeColor = Color.Black
+        pending_approvebtn.NormalImageTint = Color.White
+        pending_approvebtn.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        pending_approvebtn.OutlineThickness = 1F
+        pending_approvebtn.PressedBackground = Color.WhiteSmoke
+        pending_approvebtn.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        pending_approvebtn.PressedImageTint = Color.White
+        pending_approvebtn.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        pending_approvebtn.Rounding = New Padding(8)
+        pending_approvebtn.Size = New Size(76, 25)
+        pending_approvebtn.TabIndex = 19
+        pending_approvebtn.TextAlignment = StringAlignment.Center
+        pending_approvebtn.TextOffset = New Point(0, 0)
+        ' 
+        ' pending_rejectbtn
+        ' 
+        pending_rejectbtn.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        pending_rejectbtn.CheckButton = False
+        pending_rejectbtn.Checked = False
+        pending_rejectbtn.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        pending_rejectbtn.CheckedForeColor = Color.White
+        pending_rejectbtn.CheckedImageTint = Color.White
+        pending_rejectbtn.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        pending_rejectbtn.Content = "Reject"
+        pending_rejectbtn.DialogResult = DialogResult.None
+        pending_rejectbtn.Font = New Font("Poppins", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        pending_rejectbtn.ForeColor = Color.Black
+        pending_rejectbtn.HoverBackground = Color.Gainsboro
+        pending_rejectbtn.HoverForeColor = Color.Black
+        pending_rejectbtn.HoverImageTint = Color.White
+        pending_rejectbtn.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        pending_rejectbtn.Image = Nothing
+        pending_rejectbtn.ImageAutoCenter = True
+        pending_rejectbtn.ImageExpand = New Point(0, 0)
+        pending_rejectbtn.ImageOffset = New Point(0, 0)
+        pending_rejectbtn.Location = New Point(461, 10)
+        pending_rejectbtn.Name = "pending_rejectbtn"
+        pending_rejectbtn.NormalBackground = Color.White
+        pending_rejectbtn.NormalForeColor = Color.Black
+        pending_rejectbtn.NormalImageTint = Color.White
+        pending_rejectbtn.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        pending_rejectbtn.OutlineThickness = 1F
+        pending_rejectbtn.PressedBackground = Color.WhiteSmoke
+        pending_rejectbtn.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        pending_rejectbtn.PressedImageTint = Color.White
+        pending_rejectbtn.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        pending_rejectbtn.Rounding = New Padding(8)
+        pending_rejectbtn.Size = New Size(70, 25)
+        pending_rejectbtn.TabIndex = 18
+        pending_rejectbtn.TextAlignment = StringAlignment.Center
+        pending_rejectbtn.TextOffset = New Point(0, 0)
+        ' 
         ' SiticoneDataGridView1
         ' 
         SiticoneDataGridView1.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(48))
         SiticoneDataGridView1.CellFont = New Font("Segoe UI", 9.5F)
         SiticoneDataGridView1.DataSource = Nothing
         SiticoneDataGridView1.HeaderFont = New Font("Segoe UI", 10F, FontStyle.Bold)
-        SiticoneDataGridView1.Location = New Point(13, 44)
+        SiticoneDataGridView1.Location = New Point(13, 111)
         SiticoneDataGridView1.Name = "SiticoneDataGridView1"
-        SiticoneDataGridView1.Size = New Size(549, 271)
+        SiticoneDataGridView1.Size = New Size(549, 204)
         SiticoneDataGridView1.TabIndex = 15
         ' 
         ' DataGridView5
@@ -550,6 +771,7 @@ Partial Class SuperAdmin
         ' 
         Panel4.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         Panel4.BackColor = Color.WhiteSmoke
+        Panel4.Controls.Add(SiticoneDataGridView3)
         Panel4.Controls.Add(txtSearchUser)
         Panel4.Controls.Add(dgvUsers)
         Panel4.Controls.Add(Label9)
@@ -559,11 +781,23 @@ Partial Class SuperAdmin
         Panel4.Size = New Size(575, 678)
         Panel4.TabIndex = 0
         ' 
+        ' SiticoneDataGridView3
+        ' 
+        SiticoneDataGridView3.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        SiticoneDataGridView3.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(48))
+        SiticoneDataGridView3.CellFont = New Font("Segoe UI", 9.5F)
+        SiticoneDataGridView3.DataSource = Nothing
+        SiticoneDataGridView3.HeaderFont = New Font("Segoe UI", 10F, FontStyle.Bold)
+        SiticoneDataGridView3.Location = New Point(13, 392)
+        SiticoneDataGridView3.Name = "SiticoneDataGridView3"
+        SiticoneDataGridView3.Size = New Size(549, 271)
+        SiticoneDataGridView3.TabIndex = 17
+        ' 
         ' txtSearchUser
         ' 
-        txtSearchUser.Location = New Point(296, 12)
+        txtSearchUser.Location = New Point(313, 12)
         txtSearchUser.Name = "txtSearchUser"
-        txtSearchUser.Size = New Size(230, 23)
+        txtSearchUser.Size = New Size(213, 23)
         txtSearchUser.TabIndex = 16
         ' 
         ' dgvUsers
@@ -1132,7 +1366,7 @@ Partial Class SuperAdmin
         Panel3.BackColor = Color.White
         Panel3.Location = New Point(2, -14)
         Panel3.Name = "Panel3"
-        Panel3.Size = New Size(1481, 23)
+        Panel3.Size = New Size(1481, 25)
         Panel3.TabIndex = 3
         ' 
         ' Panel1
@@ -1469,13 +1703,89 @@ Partial Class SuperAdmin
         Label1.TabIndex = 0
         Label1.Text = "Super Admin"
         ' 
+        ' CuiButton1
+        ' 
+        CuiButton1.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        CuiButton1.CheckButton = False
+        CuiButton1.Checked = False
+        CuiButton1.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        CuiButton1.CheckedForeColor = Color.White
+        CuiButton1.CheckedImageTint = Color.White
+        CuiButton1.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        CuiButton1.Content = "Reject"
+        CuiButton1.DialogResult = DialogResult.None
+        CuiButton1.Font = New Font("Poppins", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        CuiButton1.ForeColor = Color.Black
+        CuiButton1.HoverBackground = Color.Gainsboro
+        CuiButton1.HoverForeColor = Color.Black
+        CuiButton1.HoverImageTint = Color.White
+        CuiButton1.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        CuiButton1.Image = Nothing
+        CuiButton1.ImageAutoCenter = True
+        CuiButton1.ImageExpand = New Point(0, 0)
+        CuiButton1.ImageOffset = New Point(0, 0)
+        CuiButton1.Location = New Point(461, 11)
+        CuiButton1.Name = "CuiButton1"
+        CuiButton1.NormalBackground = Color.White
+        CuiButton1.NormalForeColor = Color.Black
+        CuiButton1.NormalImageTint = Color.White
+        CuiButton1.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        CuiButton1.OutlineThickness = 1F
+        CuiButton1.PressedBackground = Color.WhiteSmoke
+        CuiButton1.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        CuiButton1.PressedImageTint = Color.White
+        CuiButton1.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        CuiButton1.Rounding = New Padding(8)
+        CuiButton1.Size = New Size(70, 25)
+        CuiButton1.TabIndex = 20
+        CuiButton1.TextAlignment = StringAlignment.Center
+        CuiButton1.TextOffset = New Point(0, 0)
+        ' 
+        ' CuiButton3
+        ' 
+        CuiButton3.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        CuiButton3.CheckButton = False
+        CuiButton3.Checked = False
+        CuiButton3.CheckedBackground = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        CuiButton3.CheckedForeColor = Color.White
+        CuiButton3.CheckedImageTint = Color.White
+        CuiButton3.CheckedOutline = Color.FromArgb(CByte(255), CByte(106), CByte(0))
+        CuiButton3.Content = "Approve"
+        CuiButton3.DialogResult = DialogResult.None
+        CuiButton3.Font = New Font("Poppins", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        CuiButton3.ForeColor = Color.Black
+        CuiButton3.HoverBackground = Color.Gainsboro
+        CuiButton3.HoverForeColor = Color.Black
+        CuiButton3.HoverImageTint = Color.White
+        CuiButton3.HoverOutline = Color.FromArgb(CByte(32), CByte(128), CByte(128), CByte(128))
+        CuiButton3.Image = Nothing
+        CuiButton3.ImageAutoCenter = True
+        CuiButton3.ImageExpand = New Point(0, 0)
+        CuiButton3.ImageOffset = New Point(0, 0)
+        CuiButton3.Location = New Point(379, 11)
+        CuiButton3.Name = "CuiButton3"
+        CuiButton3.NormalBackground = Color.White
+        CuiButton3.NormalForeColor = Color.Black
+        CuiButton3.NormalImageTint = Color.White
+        CuiButton3.NormalOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        CuiButton3.OutlineThickness = 1F
+        CuiButton3.PressedBackground = Color.WhiteSmoke
+        CuiButton3.PressedForeColor = Color.FromArgb(CByte(32), CByte(32), CByte(32))
+        CuiButton3.PressedImageTint = Color.White
+        CuiButton3.PressedOutline = Color.FromArgb(CByte(64), CByte(128), CByte(128), CByte(128))
+        CuiButton3.Rounding = New Padding(8)
+        CuiButton3.Size = New Size(76, 25)
+        CuiButton3.TabIndex = 20
+        CuiButton3.TextAlignment = StringAlignment.Center
+        CuiButton3.TextOffset = New Point(0, 0)
+        ' 
         ' SuperAdmin
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1484, 786)
-        Controls.Add(Panel1)
         Controls.Add(Panel3)
+        Controls.Add(Panel1)
         Controls.Add(TabControl1)
         FormBorderStyle = FormBorderStyle.FixedSingle
         Name = "SuperAdmin"
@@ -1498,6 +1808,7 @@ Partial Class SuperAdmin
         TabPage2.ResumeLayout(False)
         Panel7.ResumeLayout(False)
         Panel7.PerformLayout()
+        CType(SiticoneDataGridView2, ComponentModel.ISupportInitialize).EndInit()
         CType(dgvResetRequests, ComponentModel.ISupportInitialize).EndInit()
         CType(PictureBox4, ComponentModel.ISupportInitialize).EndInit()
         Panel5.ResumeLayout(False)
@@ -1507,6 +1818,7 @@ Partial Class SuperAdmin
         CType(PictureBox2, ComponentModel.ISupportInitialize).EndInit()
         Panel4.ResumeLayout(False)
         Panel4.PerformLayout()
+        CType(SiticoneDataGridView3, ComponentModel.ISupportInitialize).EndInit()
         CType(dgvUsers, ComponentModel.ISupportInitialize).EndInit()
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         TabPage3.ResumeLayout(False)
@@ -1650,7 +1962,7 @@ Partial Class SuperAdmin
     Friend WithEvents txtSearchUser As TextBox
     Friend WithEvents dashboard_btn As CuoreUI.Controls.cuiButton
     Friend WithEvents CuiButton2 As CuoreUI.Controls.cuiButton
-    Friend WithEvents CuiButton3 As CuoreUI.Controls.cuiButton
+    Friend WithEvents user_addbtn As CuoreUI.Controls.cuiButton
     Friend WithEvents SiticoneDataGridView1 As SiticoneNetCoreUI.SiticoneDataGridView
     Friend WithEvents user_mbtn As CuoreUI.Controls.cuiButton
     Friend WithEvents file_mbtn As CuoreUI.Controls.cuiButton
@@ -1660,4 +1972,13 @@ Partial Class SuperAdmin
     Friend WithEvents reports_btn As CuoreUI.Controls.cuiButton
     Friend WithEvents act_lbtn As CuoreUI.Controls.cuiButton
     Friend WithEvents refresh_btn As CuoreUI.Controls.cuiButton
+    Friend WithEvents SiticoneDataGridView2 As SiticoneNetCoreUI.SiticoneDataGridView
+    Friend WithEvents SiticoneDataGridView3 As SiticoneNetCoreUI.SiticoneDataGridView
+    Friend WithEvents pending_rejectbtn As CuoreUI.Controls.cuiButton
+    Friend WithEvents user_viewbtn As CuoreUI.Controls.cuiButton
+    Friend WithEvents user_deletebtn As CuoreUI.Controls.cuiButton
+    Friend WithEvents user_editbtn As CuoreUI.Controls.cuiButton
+    Friend WithEvents pending_approvebtn As CuoreUI.Controls.cuiButton
+    Friend WithEvents CuiButton3 As CuoreUI.Controls.cuiButton
+    Friend WithEvents CuiButton1 As CuoreUI.Controls.cuiButton
 End Class

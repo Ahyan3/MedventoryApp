@@ -34,6 +34,7 @@ Public Class SuperAdmin
                 da.Fill(dt)
 
                 dgvUsers.DataSource = dt
+                SiticoneDataGridView3.DataSource = dt
             End Using
 
             ' Optional UI polish
@@ -151,6 +152,7 @@ Public Class SuperAdmin
                 Dim dt As New DataTable()
                 da.Fill(dt)
                 dgvResetRequests.DataSource = dt
+                SiticoneDataGridView2.DataSource = dt
             End Using
 
             ' Hide ID column and rename headers
@@ -395,6 +397,7 @@ Public Class SuperAdmin
 
 
 
+
     ' =====================
     ' Approve a reset request
     ' =====================
@@ -510,7 +513,7 @@ Public Class SuperAdmin
         f.Show
     End Sub
 
-    Private Sub CuiButton3_Click(sender As Object, e As EventArgs) Handles CuiButton3.Click
+    Private Sub user_addbtn_Click(sender As Object, e As EventArgs) Handles user_addbtn.Click
         ' If form is already open, bring it to front
         If addUserFormInstance IsNot Nothing AndAlso Not addUserFormInstance.IsDisposed Then
             addUserFormInstance.BringToFront()
@@ -632,6 +635,5 @@ Public Class SuperAdmin
             MessageBox.Show("Error rejecting user: " & ex.Message)
         End Try
     End Sub
-
 
 End Class
