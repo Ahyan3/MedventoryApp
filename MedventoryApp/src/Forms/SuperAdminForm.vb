@@ -44,23 +44,7 @@ Public Class SuperAdmin
             dgvUsers.SelectionMode = DataGridViewSelectionMode.FullRowSelect
 
             ' 🧩 Add Edit and Delete buttons if not already added
-            If dgvUsers.Columns.Contains("Edit") = False Then
-                Dim editBtn As New DataGridViewButtonColumn()
-                editBtn.HeaderText = "Edit"
-                editBtn.Text = "Edit"
-                editBtn.UseColumnTextForButtonValue = True
-                editBtn.Name = "Edit"
-                dgvUsers.Columns.Add(editBtn)
-            End If
 
-            If dgvUsers.Columns.Contains("Delete") = False Then
-                Dim deleteBtn As New DataGridViewButtonColumn()
-                deleteBtn.HeaderText = "Delete"
-                deleteBtn.Text = "Delete"
-                deleteBtn.UseColumnTextForButtonValue = True
-                deleteBtn.Name = "Delete"
-                dgvUsers.Columns.Add(deleteBtn)
-            End If
 
         Catch ex As Exception
             MessageBox.Show("Error loading users: " & ex.Message)
@@ -121,7 +105,7 @@ Public Class SuperAdmin
             Using conn As New NpgsqlConnection(connectionString)
                 conn.Open()
 
-                Dim query As String = "SELECT id, full_name, email, role FROM pending_users ORDER BY created_at DESC"
+                Dim query As String = "SELECT user_id, full_name, email, role FROM pending_users ORDER BY created_at DESC"
                 Using cmd As New NpgsqlCommand(query, conn)
                     Using da As New NpgsqlDataAdapter(cmd)
                         Dim dt As New DataTable()
@@ -142,7 +126,7 @@ Public Class SuperAdmin
             Using conn As New NpgsqlConnection(connectionString)
                 conn.Open()
                 Dim query As String = "
-                    SELECT id, full_name, email, status, request_date 
+                    SELECT user_id, full_name, email, status, request_date 
                     FROM password_reset_requests
                     WHERE status = 'Pending'
                     ORDER BY request_date DESC;
@@ -156,7 +140,7 @@ Public Class SuperAdmin
             End Using
 
             ' Hide ID column and rename headers
-            dgvResetRequests.Columns("id").Visible = False
+            dgvResetRequests.Columns("user_id").Visible = False
             dgvResetRequests.Columns("full_name").HeaderText = "Full Name"
             dgvResetRequests.Columns("email").HeaderText = "Email"
             dgvResetRequests.Columns("status").HeaderText = "Status"
@@ -273,47 +257,10 @@ Public Class SuperAdmin
         Dim email As String = selectedRow.Cells("email").Value.ToString()
 
         ' 🧩 Edit Button
-        If dgvUsers.Columns(e.ColumnIndex).Name = "Edit" Then
-            Dim fullName As String = selectedRow.Cells("full_name").Value.ToString()
-            Dim role As String = selectedRow.Cells("role").Value.ToString()
 
-            Dim editForm As New EditUserForm(email, fullName, role, connectionString)
-            If editForm.ShowDialog() = DialogResult.OK Then
-                LoadUsers()
-                LoadActivityLogs()
-                AddActivityLog("Edited user: " & email)
-            End If
-        End If
 
         ' 🧩 Delete Button
-        If dgvUsers.Columns(e.ColumnIndex).Name = "Delete" Then
-            Dim confirm As DialogResult = MessageBox.Show($"Are you sure you want to delete {email}?",
-                                                      "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
-            If confirm = DialogResult.Yes Then
-                Try
-                    Using conn As New NpgsqlConnection(connectionString)
-                        conn.Open()
-                        Dim query As String = "DELETE FROM users WHERE email = @Email"
-                        Using cmd As New NpgsqlCommand(query, conn)
-                            cmd.Parameters.AddWithValue("@Email", email)
-                            cmd.ExecuteNonQuery()
-                        End Using
-                    End Using
 
-                    ' ✅ Log action
-                    AddActivityLog("Deleted user: " & email)
-
-                    ' ✅ Refresh both tables instantly
-                    LoadUsers()
-                    LoadActivityLogs() ' 👈 instantly show in the Activity Logs tab
-
-                    MessageBox.Show("User deleted successfully.", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                Catch ex As Exception
-                    MessageBox.Show("Error deleting user: " & ex.Message)
-                End Try
-            End If
-        End If
 
     End Sub
 
@@ -372,7 +319,7 @@ Public Class SuperAdmin
         Dim row = dgvResetRequests.Rows(e.RowIndex)
 
         ' Get UUID
-        Dim idValue = row.Cells("id").Value
+        Dim idValue = row.Cells("user_id").Value
         If idValue Is Nothing OrElse IsDBNull(idValue) OrElse idValue.ToString().Trim() = "" Then
             MessageBox.Show("This row is empty.", "Empty", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
@@ -407,10 +354,10 @@ Public Class SuperAdmin
                 conn.Open()
 
                 ' 🧩 Fetch the new password from the request
-                Dim newPasswordQuery As String = "SELECT new_password FROM password_reset_requests WHERE id = @Id"
+                Dim newPasswordQuery As String = "SELECT new_password FROM password_reset_requests WHERE user_id = @user_id"
                 Dim newPassword As String = ""
                 Using cmd As New NpgsqlCommand(newPasswordQuery, conn)
-                    cmd.Parameters.AddWithValue("@Id", requestId)
+                    cmd.Parameters.AddWithValue("@user_id", requestId)
                     newPassword = cmd.ExecuteScalar().ToString()
                 End Using
 
@@ -426,9 +373,9 @@ Public Class SuperAdmin
                 End Using
 
                 ' 🟢 Mark the request as approved
-                Dim updateRequestQuery As String = "UPDATE password_reset_requests SET status = 'Approved' WHERE id = @Id"
+                Dim updateRequestQuery As String = "UPDATE password_reset_requests SET status = 'Approved' WHERE user_id = @user_id"
                 Using cmd As New NpgsqlCommand(updateRequestQuery, conn)
-                    cmd.Parameters.AddWithValue("@Id", requestId)
+                    cmd.Parameters.AddWithValue("@user_id", requestId)
                     cmd.ExecuteNonQuery()
                 End Using
 
@@ -465,9 +412,9 @@ Public Class SuperAdmin
         Try
             Using conn As New NpgsqlConnection(connectionString)
                 conn.Open()
-                Dim query As String = "UPDATE password_reset_requests SET status = 'Rejected' WHERE id = @Id"
+                Dim query As String = "UPDATE password_reset_requests SET status = 'Rejected' WHERE user_id = @user_id"
                 Using cmd As New NpgsqlCommand(query, conn)
-                    cmd.Parameters.AddWithValue("@Id", requestId)
+                    cmd.Parameters.AddWithValue("@user_id", requestId)
                     cmd.ExecuteNonQuery()
                 End Using
             End Using
@@ -538,7 +485,7 @@ Public Class SuperAdmin
 
         If e.RowIndex < 0 Then Exit Sub
 
-        Dim selectedId As String = DataGridView5.Rows(e.RowIndex).Cells("id").Value.ToString()
+        Dim selectedId As String = DataGridView5.Rows(e.RowIndex).Cells("user_id").Value.ToString()
 
         ' APPROVE BUTTON CLICKED
         If TypeOf DataGridView5.Columns(e.ColumnIndex) Is DataGridViewButtonColumn AndAlso
@@ -567,7 +514,7 @@ Public Class SuperAdmin
                 conn.Open()
 
                 ' STEP 1: Get pending user details
-                Dim selectQuery As String = "SELECT id, full_name, email, role FROM pending_users WHERE id=@id"
+                Dim selectQuery As String = "SELECT user_id, full_name, email, role FROM pending_users WHERE user_id=@user_id"
                 Dim pendingUser As New DataTable()
 
                 Using cmd As New NpgsqlCommand(selectQuery, conn)
@@ -588,10 +535,10 @@ Public Class SuperAdmin
 
                 ' STEP 2: Insert into USERS table
                 Dim insertQuery As String =
-                "INSERT INTO users (id, full_name, email, role) VALUES (@id, @full_name, @email, @role)"
+                "INSERT INTO users (user_id, full_name, email, role) VALUES (@user_id, @full_name, @email, @role)"
 
                 Using cmdInsert As New NpgsqlCommand(insertQuery, conn)
-                    cmdInsert.Parameters.AddWithValue("@id", id)
+                    cmdInsert.Parameters.AddWithValue("@user_id", id)
                     cmdInsert.Parameters.AddWithValue("@full_name", fullName)
                     cmdInsert.Parameters.AddWithValue("@email", email)
                     cmdInsert.Parameters.AddWithValue("@role", role)
@@ -599,9 +546,9 @@ Public Class SuperAdmin
                 End Using
 
                 ' STEP 3: Delete from pending_users
-                Dim deleteQuery As String = "DELETE FROM pending_users WHERE id=@id"
+                Dim deleteQuery As String = "DELETE FROM pending_users WHERE user_id=@user_id"
                 Using cmdDelete As New NpgsqlCommand(deleteQuery, conn)
-                    cmdDelete.Parameters.AddWithValue("@id", id)
+                    cmdDelete.Parameters.AddWithValue("@user_id", id)
                     cmdDelete.ExecuteNonQuery()
                 End Using
 
@@ -620,7 +567,7 @@ Public Class SuperAdmin
             Using conn As New NpgsqlConnection(connectionString)
                 conn.Open()
 
-                Dim query As String = "DELETE FROM pending_users WHERE id=@id"
+                Dim query As String = "DELETE FROM pending_users WHERE user_id=@user_id"
                 Using cmd As New NpgsqlCommand(query, conn)
                     cmd.Parameters.AddWithValue("@id", id)
                     cmd.ExecuteNonQuery()
@@ -636,4 +583,62 @@ Public Class SuperAdmin
         End Try
     End Sub
 
+    Private Sub user_editbtn_Click(sender As Object, e As EventArgs) Handles user_editbtn.Click
+        ' Make sure a row is selected
+        If dgvUsers.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a user to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        ' Get the selected row
+        Dim selectedRow As DataGridViewRow = dgvUsers.SelectedRows(0)
+        Dim email As String = selectedRow.Cells("email").Value.ToString()
+        Dim fullName As String = selectedRow.Cells("full_name").Value.ToString()
+        Dim role As String = selectedRow.Cells("role").Value.ToString()
+
+        ' Open the Edit form
+        Dim editForm As New EditUserForm(email, fullName, role, connectionString)
+        If editForm.ShowDialog() = DialogResult.OK Then
+            LoadUsers()
+            LoadActivityLogs()
+            AddActivityLog("Edited user: " & email)
+        End If
+    End Sub
+
+    Private Sub user_deletebtn_Click(sender As Object, e As EventArgs) Handles user_deletebtn.Click
+        If dgvUsers.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a user to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        ' Get the selected row
+        Dim selectedRow As DataGridViewRow = dgvUsers.SelectedRows(0)
+        Dim email As String = selectedRow.Cells("email").Value.ToString()
+
+        ' Confirm deletion
+        Dim confirm As DialogResult = MessageBox.Show($"Are you sure you want to delete {email}?",
+                                                     "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+        If confirm = DialogResult.Yes Then
+            Try
+                Using conn As New NpgsqlConnection(connectionString)
+                    conn.Open()
+                    Dim query As String = "DELETE FROM users WHERE email = @Email"
+                    Using cmd As New NpgsqlCommand(query, conn)
+                        cmd.Parameters.AddWithValue("@Email", email)
+                        cmd.ExecuteNonQuery()
+                    End Using
+                End Using
+
+                ' Log action and refresh tables
+                AddActivityLog("Deleted user: " & email)
+                LoadUsers()
+                LoadActivityLogs()
+
+                MessageBox.Show("User deleted successfully.", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            Catch ex As Exception
+                MessageBox.Show("Error deleting user: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
 End Class
